@@ -7,5 +7,7 @@ print('I love flutter and node js');print('I love flutter and node js');print('I
 
 
 class GitTestClass{
+    void main();
+    print('I love git');
     print('I love git');
 } 
