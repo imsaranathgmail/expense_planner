@@ -8,6 +8,6 @@ print('I love flutter and node js');print('I love flutter and node js');print('I
 
 class GitTestClass{
     void main(args [] List);
-    print('I love git lkjl lkajs d');
-    print('I love git');
+    print('ove asdfsdf git lkjl lkajs d');
+    print('I love git sdfasdfasdf');
 } 
