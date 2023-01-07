@@ -76,7 +76,7 @@ class IncomeExpenseDataGridChartWidget extends StatelessWidget {
                 Positioned(
                   bottom: 15,
                   left: 20,
-                  child: Text(value.value.toString(),
+                  child: Text('${CurrencySymbol().currencySymbol} ${value.value}',
                       style: const TextStyle(
                           fontSize: 13, color: Colors.white, fontWeight: FontWeight.bold)),
                 ),

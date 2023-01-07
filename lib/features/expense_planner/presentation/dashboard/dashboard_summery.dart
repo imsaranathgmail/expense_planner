@@ -1,4 +1,6 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:expense_planner/features/expense_planner/domain/income_expense_data/entities/income_expense_data_entity.dart';
+import 'package:expense_planner/features/expense_planner/presentation/common_widgets/const.dart';
 import 'package:expense_planner/features/expense_planner/presentation/income_expense/bloc/income_expense_bloc.dart';
 import 'package:expense_planner/helper/constants.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +13,6 @@ class DashboardSummery extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final state = BlocProvider.of<CurrencyTypeBloc>(context).state;
-    // final entityr = state.currencyList;
-    // final currSym = entityr.isEmpty ? '' : entityr.first.currencySymbol;
     return BlocBuilder<IncomeExpenseBloc, IncomeExpenseState>(
       builder: (context, state) {
         final incomeDataList =
@@ -41,8 +40,8 @@ class DashboardSummery extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 10),
-              child:
-                  Text('Rs $myBalance', style: const TextStyle(fontSize: 35, color: Colors.white)),
+              child: Text('${CurrencySymbol().currencySymbol} $myBalance',
+                  style: const TextStyle(fontSize: 35, color: Colors.white)),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -65,7 +64,7 @@ class DashboardSummery extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(
-                        'Rs $totalIncome',
+                        '${CurrencySymbol().currencySymbol} $totalIncome',
                         style: const TextStyle(
                           fontSize: 25,
                           color: Colors.white,
@@ -91,7 +90,7 @@ class DashboardSummery extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(right: 10),
-                      child: Text('Rs $totalExpense',
+                      child: Text('${CurrencySymbol().currencySymbol} $totalExpense',
                           style: const TextStyle(fontSize: 25, color: Colors.white)),
                     ),
                   ],

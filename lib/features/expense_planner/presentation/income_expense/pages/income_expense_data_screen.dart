@@ -28,6 +28,7 @@ class IncomeExpenseDataScreen extends StatelessWidget {
     List<String> monthListData = ['Month'];
     String selectedYear = yearList[0];
     String selectedMonth = monthListData[0];
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       drawer: const DrawerWidget(),
@@ -41,10 +42,11 @@ class IncomeExpenseDataScreen extends StatelessWidget {
                   isYearMonth: true,
                   isExpanded: false,
                   items: yearList,
-                  value: selectedYear,
+                  value: state.selectedYear.isNotEmpty ? state.selectedYear : selectedYear,
                   onChanged: (value) {
-                    context.read<CommonBloc>().add(SelectYear(selectedYear: selectedYear));
-                    monthListData = monthList;
+                    BlocProvider.of<CommonBloc>(context)
+                        .add(SelectYear(selectedYear: value.toString()));
+
                     selectedYear = value.toString();
                   },
                 );
@@ -56,10 +58,11 @@ class IncomeExpenseDataScreen extends StatelessWidget {
                 return DropDwonWidget(
                   isYearMonth: true,
                   isExpanded: false,
-                  items: monthListData,
-                  value: selectedMonth,
+                  items: monthList,
+                  value: state.selectedMonth.isNotEmpty ? state.selectedMonth : selectedMonth,
                   onChanged: (value) {
-                    context.read<CommonBloc>().add(SelectMonth(selectedMonth: selectedMonth));
+                    BlocProvider.of<CommonBloc>(context)
+                        .add(SelectMonth(selectedMonth: value.toString()));
                     selectedMonth = value.toString();
                   },
                 );
@@ -67,13 +70,13 @@ class IncomeExpenseDataScreen extends StatelessWidget {
             ),
           ],
         ),
-        actions: [
-          ModelBottomSheetWidget(
-            childWidget: AddIncomeExpenseDataWidget(typeInt: isIncomeCat),
-            icon: const Icon(Icons.add_box),
-            iconColor: isIncomeCat == isIncome ? Colors.greenAccent : Colors.redAccent,
-          ),
-        ],
+        // actions: [
+        //   ModelBottomSheetWidget(
+        //     childWidget: AddIncomeExpenseDataWidget(typeInt: isIncomeCat),
+        //     icon: const Icon(Icons.add_box),
+        //     iconColor: isIncomeCat == isIncome ? Colors.greenAccent : Colors.redAccent,
+        //   ),
+        // ],
         iconTheme: const IconThemeData(color: AppColor.appBarIconThemeColor),
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -93,31 +96,46 @@ class IncomeExpenseDataScreen extends StatelessWidget {
         ),
         child: BlocBuilder<IncomeExpenseBloc, IncomeExpenseState>(
           builder: (context, state) {
-            List<IncomeExpenseDataEntity> dataList = state.dataList;
+            final commonState = context.select((CommonBloc bloc) => bloc.state);
+            final selectYear = commonState.selectedYear;
+            final selectMonth = commonState.selectedMonth;
 
-            if (dataList.isNotEmpty) {
-              dataList =
-                  dataList.where((element) => element.incomeExpenseTypeId == typeData[0]).toList();
+            // List<IncomeExpenseDataEntity> dataList = [];
 
-              final total = dataList.fold(
-                  0.0, (previousValue, element) => previousValue += double.parse(element.amount));
+            String searchString = '';
 
-              return Padding(
-                padding: EdgeInsets.only(top: AppSizes.appBarHeight, left: 10, right: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('${isIncomeCat == isIncome ? 'Income' : 'Expense'} - ${typeData[2]}',
-                        style: const TextStyle(
-                            fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold)),
-                    Text('Rs $total', style: const TextStyle(fontSize: 20, color: Colors.white)),
-                    const SizedBox(height: 10),
-                    IncomeExpenseDataListWidget(filterdList: dataList),
-                  ],
-                ),
-              );
+            if (yearList.indexOf(selectYear) != 0 && selectYear.isNotEmpty) {
+              searchString = '/$selectYear';
+              if (monthList.indexOf(selectMonth) != 0 && selectMonth.isNotEmpty) {
+                searchString = '/${monthList.indexOf(selectMonth)}/$selectYear';
+              } else {
+                searchString = '/$selectYear';
+              }
             }
-            return Container();
+
+            final dataList = state.dataList
+                .where((element) => (element.incomeExpenseTypeId == typeData[0] &&
+                    element.addDate.contains(searchString)))
+                .toList();
+
+            final total = dataList.fold(
+                0.0, (previousValue, element) => previousValue += double.parse(element.amount));
+
+            return Padding(
+              padding: EdgeInsets.only(top: AppSizes.appBarHeight, left: 10, right: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('${isIncomeCat == isIncome ? 'Income' : 'Expense'} - ${typeData[2]}',
+                      style: const TextStyle(
+                          fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold)),
+                  Text('${CurrencySymbol().currencySymbol} $total',
+                      style: const TextStyle(fontSize: 20, color: Colors.white)),
+                  const SizedBox(height: 10),
+                  IncomeExpenseDataListWidget(filterdList: dataList),
+                ],
+              ),
+            );
           },
         ),
       ),

@@ -3,6 +3,7 @@ import 'package:collection/collection.dart';
 
 import 'package:expense_planner/features/expense_planner/domain/income_expense_data/entities/income_expense_data_entity.dart';
 import 'package:expense_planner/features/expense_planner/domain/income_expense_type/entities/income_expense_type_entity.dart';
+import 'package:expense_planner/features/expense_planner/presentation/income_expense/bloc/income_expense_bloc.dart';
 
 class Service {
   static final Service _instance = Service._internal();
@@ -21,19 +22,17 @@ String dateConvertor(DateTime dateTime) {
   return selectedDate;
 }
 
-List<IncomeExpenseDataEntity> filterIncomeOrExpenseData(
-    List<IncomeExpenseDataEntity> dataList, int isIncome) {
-  return dataList.where((element) => element.isIncome == isIncome).toList();
+double getTotalAmountFromList(List<IncomeExpenseDataEntity> incomeDataList) {
+  return incomeDataList.fold(
+      0.0, (previousValue, element) => previousValue += double.parse(element.amount));
 }
 
-List<IncomeExpenseTypeEntity> filterIncomeOrExpenseType(
-    List<IncomeExpenseTypeEntity> dataList, int isIncome) {
-  return dataList.where((element) => element.isIncomeType == isIncome).toList();
-}
-
-double getTotalIncomeOrExpenseAmount(List<IncomeExpenseDataEntity> filterList) {
-  return filterList.fold<double>(
-      0.0, (previousValue, element) => previousValue + double.parse(element.amount));
+List<IncomeExpenseDataEntity> getFilteredListYearMonthWice(
+    IncomeExpenseState state, String searchString, int isIncomeData) {
+  return state.dataList
+      .where(
+          (element) => (element.isIncome == isIncomeData && element.addDate.contains(searchString)))
+      .toList();
 }
 
 Map<String, double> getIncomeOrExpenseGroupWiceAmountMap(List<IncomeExpenseDataEntity> filterList) {

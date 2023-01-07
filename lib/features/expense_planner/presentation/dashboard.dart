@@ -20,15 +20,21 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+  String currSymb = '';
   @override
   void initState() {
     BlocProvider.of<IncomeExpenseBloc>(context).add(FetchBothTypeAndData());
+    Future.delayed(const Duration(milliseconds: 250));
     BlocProvider.of<CurrencyTypeBloc>(context).add(FetchCurrency());
+    Future.delayed(const Duration(milliseconds: 250));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final currList = context.select((CurrencyTypeBloc bloc) => bloc.state).currencyList;
+    currSymb = currList.isNotEmpty ? currList.first.currencySymbol : '';
+    CurrencySymbol().setCurrencySymbol(currSymb);
     return Scaffold(
       extendBodyBehindAppBar: true,
       drawer: const DrawerWidget(),

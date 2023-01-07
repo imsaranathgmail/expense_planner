@@ -12,7 +12,7 @@ class AppRouter {
       case DashboardScreen.id:
         return MaterialPageRoute(builder: (context) => const DashboardScreen());
       case IncomeExpenseScreen.id:
-        return MaterialPageRoute(builder: (context) => const IncomeExpenseScreen());
+        return MaterialPageRoute(builder: (context) => IncomeExpenseScreen());
       case IncomeExpenseTypeScreen.id:
         return MaterialPageRoute(builder: (context) => const IncomeExpenseTypeScreen());
       case IncomeExpenseDataScreen.id:

@@ -37,7 +37,7 @@ class IncomeExpenseDataListWidget extends StatelessWidget {
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(dataEntity.amount,
+                  Text('${CurrencySymbol().currencySymbol} ${dataEntity.amount}',
                       style: const TextStyle(fontSize: 18, color: Colors.white)),
                   Text(dataEntity.addDate,
                       style: const TextStyle(fontSize: 12, color: Colors.white)),

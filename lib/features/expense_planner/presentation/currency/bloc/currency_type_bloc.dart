@@ -70,5 +70,6 @@ class CurrencyTypeBloc extends Bloc<CurrencyTypeEvent, CurrencyTypeState> {
   FutureOr<void> _onfetchCurrencyType(FetchCurrency event, Emitter<CurrencyTypeState> emit) async {
     final currencyList = await fetchCurrencyTypeUsecase.execute();
     emit(CurrencyTypeState(currencyList: currencyList));
+    Future.delayed(const Duration(milliseconds: 100));
   }
 }

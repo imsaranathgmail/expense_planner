@@ -32,7 +32,7 @@ class LastTransactionListWidget extends StatelessWidget {
                   ),
                   title: Text(dataEntity.description,
                       style: const TextStyle(fontSize: 20, color: Colors.white)),
-                  subtitle: Text('Rs ${dataEntity.amount}',
+                  subtitle: Text('${CurrencySymbol().currencySymbol} ${dataEntity.amount}',
                       style: const TextStyle(fontSize: 20, color: Colors.white)),
                   trailing: Padding(
                     padding: const EdgeInsets.only(right: 5),
