@@ -16,11 +16,24 @@ class CommonBloc extends Bloc<CommonEvent, CommonState> {
   }
 
   FutureOr<void> _onSelectedYear(SelectYear event, Emitter<CommonState> emit) {
-    emit(CommonState(selectedYear: event.selectedYear));
+    final state = this.state;
+    emit(
+      CommonState(
+        selectedYear: event.selectedYear,
+        selectedMonth: state.selectedMonth,
+      ),
+    );
+    Future.delayed(Duration(seconds: 1));
   }
 
   FutureOr<void> _onSelectedMonth(SelectMonth event, Emitter<CommonState> emit) {
-    emit(CommonState(selectedMonth: event.selectedMonth));
+    final state = this.state;
+    emit(
+      CommonState(
+        selectedYear: state.selectedYear,
+        selectedMonth: event.selectedMonth,
+      ),
+    );
   }
 
   FutureOr<void> _onSelectedExpenseType(SelectIncomeExpenseType event, Emitter<CommonState> emit) {

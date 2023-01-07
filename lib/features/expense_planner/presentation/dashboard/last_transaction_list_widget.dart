@@ -1,5 +1,5 @@
 import 'package:expense_planner/features/expense_planner/presentation/common_widgets/const.dart';
-import 'package:expense_planner/features/expense_planner/presentation/income_expense/bloc/bloc/income_expense_bloc.dart';
+import 'package:expense_planner/features/expense_planner/presentation/income_expense/bloc/income_expense_bloc.dart';
 import 'package:expense_planner/helper/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,7 +32,7 @@ class LastTransactionListWidget extends StatelessWidget {
                   ),
                   title: Text(dataEntity.description,
                       style: const TextStyle(fontSize: 20, color: Colors.white)),
-                  subtitle: Text('Rs ${dataEntity.amount}',
+                  subtitle: Text('${CurrencySymbol().currencySymbol} ${dataEntity.amount}',
                       style: const TextStyle(fontSize: 20, color: Colors.white)),
                   trailing: Padding(
                     padding: const EdgeInsets.only(right: 5),

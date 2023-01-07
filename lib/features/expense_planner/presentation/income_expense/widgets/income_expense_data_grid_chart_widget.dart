@@ -6,7 +6,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 import 'package:expense_planner/features/expense_planner/domain/income_expense_type/entities/income_expense_type_entity.dart';
 import 'package:expense_planner/features/expense_planner/presentation/common_widgets/const.dart';
-import 'package:expense_planner/features/expense_planner/presentation/income_expense/bloc/bloc/income_expense_bloc.dart';
+import 'package:expense_planner/features/expense_planner/presentation/income_expense/bloc/income_expense_bloc.dart';
 import 'package:expense_planner/features/expense_planner/presentation/income_expense/pages/income_expense_data_screen.dart';
 
 class IncomeExpenseDataGridChartWidget extends StatelessWidget {
@@ -76,7 +76,7 @@ class IncomeExpenseDataGridChartWidget extends StatelessWidget {
                 Positioned(
                   bottom: 15,
                   left: 20,
-                  child: Text(value.value.toString(),
+                  child: Text('${CurrencySymbol().currencySymbol} ${value.value}',
                       style: const TextStyle(
                           fontSize: 13, color: Colors.white, fontWeight: FontWeight.bold)),
                 ),

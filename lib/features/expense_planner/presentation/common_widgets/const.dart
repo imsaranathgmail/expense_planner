@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 class AppColor {
@@ -30,6 +31,24 @@ class AppSizes {
 class AppGloable {
   static String selectedDate =
       '${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}';
+}
+
+class CurrencySymbol {
+  late String _symbol;
+
+  CurrencySymbol._currencySymbol();
+
+  static final CurrencySymbol _instance = CurrencySymbol._currencySymbol();
+
+  factory CurrencySymbol() {
+    return _instance;
+  }
+
+  setCurrencySymbol(String value) {
+    _symbol = value;
+  }
+
+  String get currencySymbol => _symbol;
 }
 
 const List<String> yearList = [
