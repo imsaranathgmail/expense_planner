@@ -1,6 +1,6 @@
 import 'package:expense_planner/features/expense_planner/domain/income_expense_type/repositories/income_expense_type_repositroy.dart';
 import 'package:expense_planner/features/expense_planner/domain/income_expense_type/usecases/income_expense_type_usecase.dart';
-import 'package:expense_planner/features/expense_planner/presentation/income_expense/bloc/bloc/income_expense_bloc.dart';
+import 'package:expense_planner/features/expense_planner/presentation/income_expense/bloc/income_expense_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:expense_planner/features/expense_planner/data/currency/datasources/currency_type_datasource.dart';
 import 'package:expense_planner/features/expense_planner/data/currency/repositories/currency_type_repositroy_impl.dart';

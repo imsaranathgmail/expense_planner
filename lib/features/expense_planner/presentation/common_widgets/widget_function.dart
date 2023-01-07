@@ -2,7 +2,7 @@ import 'package:expense_planner/features/expense_planner/domain/income_expense_t
 import 'package:expense_planner/features/expense_planner/presentation/common_widgets/const.dart';
 import 'package:expense_planner/features/expense_planner/presentation/common_widgets/dialog_widget.dart';
 import 'package:expense_planner/features/expense_planner/presentation/common_widgets/model_bottom_sheet_widget.dart';
-import 'package:expense_planner/features/expense_planner/presentation/income_expense/bloc/bloc/income_expense_bloc.dart';
+import 'package:expense_planner/features/expense_planner/presentation/income_expense/bloc/income_expense_bloc.dart';
 import 'package:expense_planner/features/expense_planner/presentation/income_expense/widgets/add_income_expense_type_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

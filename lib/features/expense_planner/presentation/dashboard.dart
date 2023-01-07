@@ -5,7 +5,7 @@ import 'package:expense_planner/features/expense_planner/presentation/currency/b
 import 'package:expense_planner/features/expense_planner/presentation/dashboard/dashboard_summery.dart';
 import 'package:expense_planner/features/expense_planner/presentation/dashboard/last_transaction_list_widget.dart';
 import 'package:expense_planner/features/expense_planner/presentation/drawer/drawer_widget.dart';
-import 'package:expense_planner/features/expense_planner/presentation/income_expense/bloc/bloc/income_expense_bloc.dart';
+import 'package:expense_planner/features/expense_planner/presentation/income_expense/bloc/income_expense_bloc.dart';
 import 'package:expense_planner/features/expense_planner/presentation/income_expense/widgets/add_income_expense_data_widget.dart';
 import 'package:expense_planner/helper/constants.dart';
 import 'package:flutter/material.dart';

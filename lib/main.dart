@@ -4,7 +4,7 @@ import 'package:expense_planner/features/expense_planner/presentation/common_blo
 import 'package:expense_planner/features/expense_planner/presentation/currency/bloc/currency_type_bloc.dart';
 
 import 'package:expense_planner/features/expense_planner/presentation/dashboard.dart';
-import 'package:expense_planner/features/expense_planner/presentation/income_expense/bloc/bloc/income_expense_bloc.dart';
+import 'package:expense_planner/features/expense_planner/presentation/income_expense/bloc/income_expense_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
