@@ -25,8 +25,9 @@ class IncomeExpenseDataScreen extends StatelessWidget {
     final typeData = ModalRoute.of(context)!.settings.arguments as List;
     int isIncomeCat = typeData[3];
 
+    List<String> monthListData = ['Month'];
     String selectedYear = yearList[0];
-    String selectedMonth = monthList[0];
+    String selectedMonth = monthListData[0];
     return Scaffold(
       extendBodyBehindAppBar: true,
       drawer: const DrawerWidget(),
@@ -43,6 +44,7 @@ class IncomeExpenseDataScreen extends StatelessWidget {
                   value: selectedYear,
                   onChanged: (value) {
                     context.read<CommonBloc>().add(SelectYear(selectedYear: selectedYear));
+                    monthListData = monthList;
                     selectedYear = value.toString();
                   },
                 );
@@ -54,7 +56,7 @@ class IncomeExpenseDataScreen extends StatelessWidget {
                 return DropDwonWidget(
                   isYearMonth: true,
                   isExpanded: false,
-                  items: monthList,
+                  items: monthListData,
                   value: selectedMonth,
                   onChanged: (value) {
                     context.read<CommonBloc>().add(SelectMonth(selectedMonth: selectedMonth));

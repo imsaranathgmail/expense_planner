@@ -1,3 +1,5 @@
+import 'package:expense_planner/features/expense_planner/domain/income_expense_data/entities/income_expense_data_entity.dart';
+import 'package:expense_planner/features/expense_planner/domain/income_expense_type/entities/income_expense_type_entity.dart';
 import 'package:expense_planner/features/expense_planner/presentation/common_bloc/common_bloc.dart';
 import 'package:expense_planner/features/expense_planner/presentation/common_widgets/const.dart';
 import 'package:expense_planner/features/expense_planner/presentation/common_widgets/drop_down_widget.dart';
@@ -17,8 +19,9 @@ class IncomeExpenseScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String> monthListData = ['Month'];
     String selectedYear = yearList[0];
-    String selectedMonth = monthList[0];
+    String selectedMonth = monthListData[0];
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -36,6 +39,7 @@ class IncomeExpenseScreen extends StatelessWidget {
                   value: selectedYear,
                   onChanged: (value) {
                     context.read<CommonBloc>().add(SelectYear(selectedYear: selectedYear));
+                    monthListData = monthList;
                     selectedYear = value.toString();
                   },
                 );
@@ -47,7 +51,7 @@ class IncomeExpenseScreen extends StatelessWidget {
                 return DropDwonWidget(
                   isYearMonth: true,
                   isExpanded: false,
-                  items: monthList,
+                  items: monthListData,
                   value: selectedMonth,
                   onChanged: (value) {
                     context.read<CommonBloc>().add(SelectMonth(selectedMonth: selectedMonth));
@@ -93,21 +97,30 @@ class IncomeExpenseScreen extends StatelessWidget {
         ),
         child: BlocBuilder<IncomeExpenseBloc, IncomeExpenseState>(
           builder: (context, state) {
+            final commonState = BlocProvider.of<CommonBloc>(context).state;
+
             double totalIncome = 0.0;
             double totalExpense = 0.0;
-            final incomeDataList =
-                state.dataList.where((element) => element.isIncome == isIncome).toList();
+            List<IncomeExpenseDataEntity> incomeDataList = [];
+            List<MapEntry<String, double>> incomeDataMap = [];
+            List<IncomeExpenseDataEntity> expenseDataList = [];
+            List<MapEntry<String, double>> expenseDataMap = [];
+
+            incomeDataList = state.dataList
+              ..where((element) =>
+                  (element.isIncome == isIncome) &&
+                  (element.addDate
+                      .contains('/${commonState.selectedMonth.indexOf(selectedMonth)}/'))).toList();
+            print(incomeDataList);
             totalIncome = incomeDataList.fold(
                 0.0, (previousValue, element) => previousValue += double.parse(element.amount));
-            final incomeDataMap =
-                getIncomeOrExpenseGroupWiceAmountMap(incomeDataList).entries.toList();
+            incomeDataMap = getIncomeOrExpenseGroupWiceAmountMap(incomeDataList).entries.toList();
 
-            final expenseDataList =
+            expenseDataList =
                 state.dataList.where((element) => element.isIncome == isExpense).toList();
             totalExpense = expenseDataList.fold(
                 0.0, (previousValue, element) => previousValue += double.parse(element.amount));
-            final expenseDataMap =
-                getIncomeOrExpenseGroupWiceAmountMap(expenseDataList).entries.toList();
+            expenseDataMap = getIncomeOrExpenseGroupWiceAmountMap(expenseDataList).entries.toList();
 
             return Padding(
               padding: EdgeInsets.only(top: AppSizes.appBarHeight, left: 10, right: 10),
