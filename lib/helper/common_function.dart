@@ -2,43 +2,59 @@
 import 'package:collection/collection.dart';
 
 import 'package:expense_planner/features/expense_planner/domain/income_expense_data/entities/income_expense_data_entity.dart';
-import 'package:expense_planner/features/expense_planner/domain/income_expense_type/entities/income_expense_type_entity.dart';
 import 'package:expense_planner/features/expense_planner/presentation/income_expense/bloc/income_expense_bloc.dart';
 
-class Service {
-  static final Service _instance = Service._internal();
-  factory Service(String value) => _instance;
-  Service._internal() {
-    currencySymbol = '';
+class Functions {
+  static Functions? _instance;
+  Functions._internal();
+
+  factory Functions() {
+    _instance ??= Functions._internal();
+    return _instance!;
   }
 
-  String? currencySymbol;
+  String dateConvertor(DateTime dateTime) {
+    String selectedDate = '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+    return selectedDate;
+  }
 
-  String get myVariable => currencySymbol!;
+  double getTotalAmountFromList(List<IncomeExpenseDataEntity> incomeDataList) {
+    return incomeDataList.fold(
+        0.0, (previousValue, element) => previousValue += double.parse(element.amount));
+  }
+
+  List<IncomeExpenseDataEntity> getFilteredListYearMonthWice(
+      IncomeExpenseState state, String searchString, int isIncomeData) {
+    return state.dataList
+        .where((element) =>
+            (element.isIncome == isIncomeData && element.addDate.contains(searchString)))
+        .toList();
+  }
+
+  Map<String, double> getIncomeOrExpenseGroupWiceAmountMap(
+      List<IncomeExpenseDataEntity> filterList) {
+    return filterList.groupFoldBy<String, double>(
+        (element) => element.incomeExpenseTypeId,
+        (previous, element) => (previous != null
+            ? previous += int.parse(element.amount)
+            : double.parse(element.amount)));
+  }
 }
 
-String dateConvertor(DateTime dateTime) {
-  String selectedDate = '${dateTime.day}/${dateTime.month}/${dateTime.year}';
-  return selectedDate;
-}
+class CurrencySymbol {
+  static CurrencySymbol? _instance;
+  String? _symbol;
 
-double getTotalAmountFromList(List<IncomeExpenseDataEntity> incomeDataList) {
-  return incomeDataList.fold(
-      0.0, (previousValue, element) => previousValue += double.parse(element.amount));
-}
+  CurrencySymbol._internal(this._symbol);
 
-List<IncomeExpenseDataEntity> getFilteredListYearMonthWice(
-    IncomeExpenseState state, String searchString, int isIncomeData) {
-  return state.dataList
-      .where(
-          (element) => (element.isIncome == isIncomeData && element.addDate.contains(searchString)))
-      .toList();
-}
+  factory CurrencySymbol() {
+    _instance ??= CurrencySymbol._internal(null);
+    return _instance!;
+  }
 
-Map<String, double> getIncomeOrExpenseGroupWiceAmountMap(List<IncomeExpenseDataEntity> filterList) {
-  return filterList.groupFoldBy<String, double>(
-      (element) => element.incomeExpenseTypeId,
-      (previous, element) => (previous != null
-          ? previous += int.parse(element.amount)
-          : double.parse(element.amount)));
+  setCurrencySymbol(String symbol) {
+    _symbol = symbol;
+  }
+
+  String get currencySymbol => _symbol!;
 }

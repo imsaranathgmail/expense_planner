@@ -1,3 +1,5 @@
+import 'package:expense_planner/features/expense_planner/data/income_expense_type/datasources/income_expense_type_datasource.dart';
+import 'package:expense_planner/features/expense_planner/data/income_expense_type/repositories/income_expense_type_repositroy_impl.dart';
 import 'package:expense_planner/features/expense_planner/domain/income_expense_type/repositories/income_expense_type_repositroy.dart';
 import 'package:expense_planner/features/expense_planner/domain/income_expense_type/usecases/income_expense_type_usecase.dart';
 import 'package:expense_planner/features/expense_planner/presentation/income_expense/bloc/income_expense_bloc.dart';
@@ -6,8 +8,6 @@ import 'package:expense_planner/features/expense_planner/data/currency/datasourc
 import 'package:expense_planner/features/expense_planner/data/currency/repositories/currency_type_repositroy_impl.dart';
 import 'package:expense_planner/features/expense_planner/data/income_expense_data/datasources/income_expense_data_datasource.dart';
 import 'package:expense_planner/features/expense_planner/data/income_expense_data/repositories/income_expense_data_repositroy_impl.dart';
-import 'package:expense_planner/features/expense_planner/data/income_expense_type/income_type/datasources/income_expense_type_datasource.dart';
-import 'package:expense_planner/features/expense_planner/data/income_expense_type/income_type/repositories/income_expense_type_repositroy_impl.dart';
 import 'package:expense_planner/features/expense_planner/domain/currency/repositories/expense_type_repositroy.dart';
 import 'package:expense_planner/features/expense_planner/domain/currency/usecases/expense_type_usecase.dart';
 import 'package:expense_planner/features/expense_planner/domain/income_expense_data/repositories/income_expense_data_repositroy.dart';
@@ -33,7 +33,7 @@ Future<void> init() async {
 
   //? Income Expense Data Usecase
   sl.registerLazySingleton(() => FetchIncomeExpenseDataUsecase(incomeExpenseDataRepository: sl()));
-  sl.registerLazySingleton(() => CustomeFetchQueryUsecase(incomeExpenseDataRepository: sl()));
+  // sl.registerLazySingleton(() => CustomeFetchQueryUsecase(incomeExpenseDataRepository: sl()));
   sl.registerLazySingleton(() => AddIncomeExpenseDataUsecase(incomeExpenseDataRepository: sl()));
   sl.registerLazySingleton(() => UpdateIncomeExpenseDataUsecase(incomeExpenseDataRepository: sl()));
   sl.registerLazySingleton(() => DeleteIncomeExpenseDataUsecase(incomeExpenseDataRepository: sl()));

@@ -2,7 +2,7 @@ import 'package:expense_planner/features/expense_planner/domain/income_expense_d
 
 abstract class IncomeExpenseDataRepository {
   Future<List<IncomeExpenseDataEntity>> fetchIncomeExpenseData();
-  Future<List<Map<String, dynamic>>> customeFetchQueryData(String sql);
+  // Future<List<Map<String, dynamic>>> customeFetchQueryData(String sql);
   Future<bool> saveIncomeExpenseData(IncomeExpenseDataEntity incomeExpenseDataEntity);
   Future<bool> updateIncomeExpenseData(IncomeExpenseDataEntity incomeExpenseDataEntity);
   Future<bool> deleteIncomeExpenseData(IncomeExpenseDataEntity incomeExpenseDataEntity);

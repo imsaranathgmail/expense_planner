@@ -7,7 +7,7 @@ import 'package:uuid/uuid.dart';
 
 import 'package:expense_planner/features/expense_planner/domain/income_expense_type/entities/income_expense_type_entity.dart';
 import 'package:expense_planner/features/expense_planner/presentation/common_widgets/button_widget.dart';
-import 'package:expense_planner/features/expense_planner/presentation/common_widgets/const.dart';
+import 'package:expense_planner/features/expense_planner/presentation/common_widgets/app_ui_params.dart';
 import 'package:expense_planner/features/expense_planner/presentation/common_widgets/dialog_widget.dart';
 import 'package:expense_planner/helper/constants.dart';
 

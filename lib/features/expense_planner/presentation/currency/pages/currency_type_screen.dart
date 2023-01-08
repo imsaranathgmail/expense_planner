@@ -1,10 +1,18 @@
-import 'package:expense_planner/features/expense_planner/presentation/common_widgets/const.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:expense_planner/features/expense_planner/presentation/common_widgets/message_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:expense_planner/features/expense_planner/presentation/common_widgets/app_ui_params.dart';
+import 'package:expense_planner/features/expense_planner/presentation/common_widgets/dialog_widget.dart';
+import 'package:expense_planner/features/expense_planner/presentation/common_widgets/glass_effect_widget.dart';
 import 'package:expense_planner/features/expense_planner/presentation/common_widgets/model_bottom_sheet_widget.dart';
 import 'package:expense_planner/features/expense_planner/presentation/currency/bloc/currency_type_bloc.dart';
 import 'package:expense_planner/features/expense_planner/presentation/currency/widgets/add_currency_type_widget.dart';
 import 'package:expense_planner/features/expense_planner/presentation/drawer/drawer_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:expense_planner/features/expense_planner/presentation/income_expense/pages/income_expense_type_screen.dart';
+import 'package:expense_planner/features/routing/app_router.dart';
+import 'package:expense_planner/helper/constants.dart';
 
 class CurrencyTypeScreen extends StatelessWidget {
   static const id = 'CurrencyTypeScreen';
@@ -63,7 +71,7 @@ class CurrencyTypeScreen extends StatelessWidget {
               const SizedBox(height: 10),
               BlocBuilder<CurrencyTypeBloc, CurrencyTypeState>(
                 builder: (context, state) {
-                  if (state.currencyList.isNotEmpty) {
+                  if (state is CurrencyLoadedState) {
                     return Expanded(
                       child: ListView.builder(
                         padding: EdgeInsets.zero,
@@ -100,6 +108,13 @@ class CurrencyTypeScreen extends StatelessWidget {
                         },
                       ),
                     );
+                  } else if (state is ErrorState) {
+                    return MessageWidget(
+                      message: state.message,
+                    );
+                    // print(state.message);
+                    // DialogWidget.showDialogBox(
+                    //     context, Colors.red, false, warningTitle, state.message);
                   }
                   return Container();
                 },

@@ -25,7 +25,7 @@ class DatePickerWidget extends StatelessWidget {
           minTime: DateTime(2022, 1, 1),
           maxTime: DateTime(2100, 1, 1),
           onConfirm: (time) {
-            final selectedDate = dateConvertor(time);
+            final selectedDate = Functions().dateConvertor(time);
             context.read<CommonBloc>().add(SelecteDate(selectedDate: selectedDate));
             datePickerController.text = selectedDate;
           },

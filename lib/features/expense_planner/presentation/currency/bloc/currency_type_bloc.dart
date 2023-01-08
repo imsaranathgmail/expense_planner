@@ -6,6 +6,8 @@ import 'package:equatable/equatable.dart';
 
 import 'package:expense_planner/features/expense_planner/domain/currency/entities/currency_type_entity.dart';
 import 'package:expense_planner/features/expense_planner/domain/currency/usecases/expense_type_usecase.dart';
+import 'package:expense_planner/helper/constants.dart';
+import 'package:expense_planner/injection_container.dart';
 
 part 'currency_type_event.dart';
 part 'currency_type_state.dart';
@@ -19,7 +21,7 @@ class CurrencyTypeBloc extends Bloc<CurrencyTypeEvent, CurrencyTypeState> {
     this.addCurrencyTypeUsecase,
     this.updateCurrencyTypeUsecase,
     this.fetchCurrencyTypeUsecase,
-  ) : super(const CurrencyTypeState()) {
+  ) : super(const CurrencyLoadedState(currencyList: [])) {
     on<AddCurrency>(_onAddCurrency);
     on<UpdateCurrency>(_onUpdateCurrencyType);
     on<FetchCurrency>(_onfetchCurrencyType);
@@ -32,16 +34,15 @@ class CurrencyTypeBloc extends Bloc<CurrencyTypeEvent, CurrencyTypeState> {
     final result = await addCurrencyTypeUsecase.execute(dataEntity);
     if (result) {
       emit(
-        CurrencyTypeState(
+        CurrencyLoadedState(
           currencyList: List.from(state.currencyList)..add(dataEntity),
         ),
       );
     } else {
-      emit(
-        CurrencyTypeState(
-          currencyList: state.currencyList,
-        ),
-      );
+      emit(ErrorState(
+        currencyTypeTxt + notSaved,
+        currencyList: state.currencyList,
+      ));
     }
   }
 
@@ -57,19 +58,19 @@ class CurrencyTypeBloc extends Bloc<CurrencyTypeEvent, CurrencyTypeState> {
       currencyList = List.from(currencyList)
         ..removeWhere((element) => element.id == dataEntiry.id)
         ..insert(0, dataEntiry);
-      emit(CurrencyTypeState(currencyList: currencyList));
+      emit(CurrencyLoadedState(currencyList: currencyList));
     } else {
-      emit(
-        CurrencyTypeState(
-          currencyList: state.currencyList,
-        ),
-      );
+      emit(ErrorState(currencyTypeTxt + notUpdated, currencyList: state.currencyList));
     }
   }
 
   FutureOr<void> _onfetchCurrencyType(FetchCurrency event, Emitter<CurrencyTypeState> emit) async {
     final currencyList = await fetchCurrencyTypeUsecase.execute();
-    emit(CurrencyTypeState(currencyList: currencyList));
-    Future.delayed(const Duration(milliseconds: 100));
+    if (currencyList.isNotEmpty) {
+      emit(CurrencyLoadedState(currencyList: currencyList));
+      Future.delayed(const Duration(milliseconds: 100));
+    } else {
+      emit(ErrorState(currencyTypeTxt + notLoaded, currencyList: state.currencyList));
+    }
   }
 }

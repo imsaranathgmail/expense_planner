@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:expense_planner/features/expense_planner/presentation/common_widgets/const.dart';
+import 'package:expense_planner/features/expense_planner/presentation/common_widgets/app_ui_params.dart';
 import 'package:flutter/material.dart';
 
 class ButtonWidget extends StatelessWidget {

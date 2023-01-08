@@ -1,6 +1,6 @@
 import 'package:expense_planner/features/expense_planner/presentation/currency/pages/currency_type_screen.dart';
 import 'package:expense_planner/features/expense_planner/presentation/dashboard.dart';
-import 'package:expense_planner/features/expense_planner/presentation/common_widgets/const.dart';
+import 'package:expense_planner/features/expense_planner/presentation/common_widgets/app_ui_params.dart';
 import 'package:expense_planner/features/expense_planner/presentation/common_widgets/glass_effect_widget.dart';
 import 'package:expense_planner/features/expense_planner/presentation/income_expense/pages/income_expense_screen.dart';
 import 'package:expense_planner/features/expense_planner/presentation/income_expense/pages/income_expense_type_screen.dart';
