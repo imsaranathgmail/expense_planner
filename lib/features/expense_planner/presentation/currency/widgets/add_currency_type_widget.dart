@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:expense_planner/features/expense_planner/domain/currency/entities/currency_type_entity.dart';
 import 'package:expense_planner/features/expense_planner/presentation/common_widgets/button_widget.dart';
-import 'package:expense_planner/features/expense_planner/presentation/common_widgets/const.dart';
+import 'package:expense_planner/features/expense_planner/presentation/common_widgets/app_ui_params.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 

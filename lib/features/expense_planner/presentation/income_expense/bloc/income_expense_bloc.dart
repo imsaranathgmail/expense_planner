@@ -8,6 +8,7 @@ import 'package:expense_planner/features/expense_planner/domain/income_expense_d
 import 'package:expense_planner/features/expense_planner/domain/income_expense_data/usecases/income_expense_data_usecase.dart';
 import 'package:expense_planner/features/expense_planner/domain/income_expense_type/entities/income_expense_type_entity.dart';
 import 'package:expense_planner/features/expense_planner/domain/income_expense_type/usecases/income_expense_type_usecase.dart';
+import 'package:expense_planner/helper/constants.dart';
 
 part 'income_expense_event.dart';
 part 'income_expense_state.dart';
@@ -30,7 +31,7 @@ class IncomeExpenseBloc extends Bloc<IncomeExpenseEvent, IncomeExpenseState> {
     this.updateIncomeExpenseDataUsecase,
     this.deleteIncomeExpenseDataUsecase,
     this.fetchIncomeExpenseDataUsecase,
-  ) : super(LoadingState()) {
+  ) : super(const IncomeExpenseDataLoaded(typeList: [], dataList: [])) {
     //! Fetch both Type and Data
     on<FetchBothTypeAndData>(_onFetchBothTypeData);
     //! Income Expense Type
@@ -51,7 +52,7 @@ class IncomeExpenseBloc extends Bloc<IncomeExpenseEvent, IncomeExpenseState> {
     final state = this.state;
     final typeList = await fetchIncomeExpenseTypeUsecase.execute();
     emit(
-      IncomeExpenseState(
+      IncomeExpenseDataLoaded(
         typeList: typeList,
         dataList: state.dataList,
       ),
@@ -66,17 +67,15 @@ class IncomeExpenseBloc extends Bloc<IncomeExpenseEvent, IncomeExpenseState> {
     final result = await addIncomeExpenseTypeUsecase.execute(dataEntity);
     if (result) {
       emit(
-        IncomeExpenseState(
+        IncomeExpenseDataLoaded(
           typeList: List.from(state.typeList)..add(dataEntity),
           dataList: state.dataList,
         ),
       );
     } else {
       emit(
-        IncomeExpenseState(
-          typeList: state.typeList,
-          dataList: state.dataList,
-        ),
+        ErrorState(dataEntity.isIncomeType == isIncome ? incomeTypeTxt : expenseTypeTxt + notSaved,
+            typeList: state.typeList, dataList: state.dataList),
       );
     }
   }
@@ -94,17 +93,17 @@ class IncomeExpenseBloc extends Bloc<IncomeExpenseEvent, IncomeExpenseState> {
         ..removeWhere((element) => element.id == dataEntity.id)
         ..insert(0, dataEntity);
       emit(
-        IncomeExpenseState(
+        IncomeExpenseDataLoaded(
           typeList: typeList,
           dataList: state.dataList,
         ),
       );
     } else {
       emit(
-        IncomeExpenseState(
-          typeList: state.typeList,
-          dataList: state.dataList,
-        ),
+        ErrorState(
+            dataEntity.isIncomeType == isIncome ? incomeTypeTxt : expenseTypeTxt + notUpdated,
+            typeList: state.typeList,
+            dataList: state.dataList),
       );
     }
   }
@@ -123,17 +122,17 @@ class IncomeExpenseBloc extends Bloc<IncomeExpenseEvent, IncomeExpenseState> {
       dataList = List.from(dataList)
         ..removeWhere((element) => element.incomeExpenseTypeId == dataEntity.id);
       emit(
-        IncomeExpenseState(
+        IncomeExpenseDataLoaded(
           typeList: typeList,
           dataList: dataList,
         ),
       );
     } else {
       emit(
-        IncomeExpenseState(
-          typeList: state.typeList,
-          dataList: state.dataList,
-        ),
+        ErrorState(
+            dataEntity.isIncomeType == isIncome ? incomeTypeTxt : expenseTypeTxt + notDeleted,
+            typeList: state.typeList,
+            dataList: state.dataList),
       );
     }
   }
@@ -144,13 +143,19 @@ class IncomeExpenseBloc extends Bloc<IncomeExpenseEvent, IncomeExpenseState> {
       FetchIncomeExpenseData event, Emitter<IncomeExpenseState> emit) async {
     final state = this.state;
     final dataList = await fetchIncomeExpenseDataUsecase.execute();
-
-    emit(
-      IncomeExpenseState(
-        typeList: state.typeList,
-        dataList: dataList,
-      ),
-    );
+    if (dataList.isNotEmpty) {
+      emit(
+        IncomeExpenseDataLoaded(
+          typeList: state.typeList,
+          dataList: dataList,
+        ),
+      );
+    } else {
+      emit(
+        ErrorState(incomeExpenseDataTxt + notLoaded,
+            typeList: state.typeList, dataList: state.dataList),
+      );
+    }
   }
 
   FutureOr<void> _onAddIncomeExpenseData(
@@ -161,7 +166,7 @@ class IncomeExpenseBloc extends Bloc<IncomeExpenseEvent, IncomeExpenseState> {
     final result = await addIncomeExpenseDataUsecase.execute(dataEntity);
     if (result) {
       emit(
-        IncomeExpenseState(
+        IncomeExpenseDataLoaded(
           typeList: state.typeList,
           dataList: List.from(state.dataList)..add(dataEntity),
           // dataList: state.dataList,
@@ -169,10 +174,8 @@ class IncomeExpenseBloc extends Bloc<IncomeExpenseEvent, IncomeExpenseState> {
       );
     } else {
       emit(
-        IncomeExpenseState(
-          typeList: state.typeList,
-          dataList: state.dataList,
-        ),
+        ErrorState(dataEntity.isIncome == isIncome ? incomeDataTxt : expenseDataTxt + notSaved,
+            typeList: state.typeList, dataList: state.dataList),
       );
     }
   }
@@ -190,7 +193,7 @@ class IncomeExpenseBloc extends Bloc<IncomeExpenseEvent, IncomeExpenseState> {
         ..removeWhere((element) => element.id == dataEntity.id)
         ..insert(0, dataEntity);
       emit(
-        IncomeExpenseState(
+        IncomeExpenseDataLoaded(
           typeList: state.typeList,
           dataList: dataList,
           // dataList: state.dataList,
@@ -198,10 +201,8 @@ class IncomeExpenseBloc extends Bloc<IncomeExpenseEvent, IncomeExpenseState> {
       );
     } else {
       emit(
-        IncomeExpenseState(
-          typeList: state.typeList,
-          dataList: state.dataList,
-        ),
+        ErrorState(dataEntity.isIncome == isIncome ? incomeDataTxt : expenseDataTxt + notUpdated,
+            typeList: state.typeList, dataList: state.dataList),
       );
     }
   }
@@ -217,17 +218,15 @@ class IncomeExpenseBloc extends Bloc<IncomeExpenseEvent, IncomeExpenseState> {
 
       dataList = List.from(dataList)..removeWhere((element) => element.id == dataEntity.id);
       emit(
-        IncomeExpenseState(
+        IncomeExpenseDataLoaded(
           typeList: state.typeList,
           dataList: dataList,
         ),
       );
     } else {
       emit(
-        IncomeExpenseState(
-          typeList: state.typeList,
-          dataList: state.dataList,
-        ),
+        ErrorState(dataEntity.isIncome == isIncome ? incomeDataTxt : expenseDataTxt + notDeleted,
+            typeList: state.typeList, dataList: state.dataList),
       );
     }
   }
@@ -236,9 +235,8 @@ class IncomeExpenseBloc extends Bloc<IncomeExpenseEvent, IncomeExpenseState> {
       FetchBothTypeAndData event, Emitter<IncomeExpenseState> emit) async {
     final typeList = await fetchIncomeExpenseTypeUsecase.execute();
     final dataList = await fetchIncomeExpenseDataUsecase.execute();
-
     emit(
-      IncomeExpenseState(
+      IncomeExpenseDataLoaded(
         typeList: typeList,
         dataList: dataList,
       ),

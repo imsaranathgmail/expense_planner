@@ -1,11 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable
 
+import 'package:expense_planner/helper/common_function.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import 'package:expense_planner/features/expense_planner/domain/income_expense_type/entities/income_expense_type_entity.dart';
-import 'package:expense_planner/features/expense_planner/presentation/common_widgets/const.dart';
+import 'package:expense_planner/features/expense_planner/presentation/common_widgets/app_ui_params.dart';
 import 'package:expense_planner/features/expense_planner/presentation/income_expense/bloc/income_expense_bloc.dart';
 import 'package:expense_planner/features/expense_planner/presentation/income_expense/pages/income_expense_data_screen.dart';
 
@@ -22,11 +23,6 @@ class IncomeExpenseDataGridChartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final incomeTypeList =
-    //     context.select((IncomeExpenseTypeBloc bloc) => bloc.state.incomeExpenseTypeDataList);
-
-    // context.read<IncomeExpenseTypeBloc>().add(FetchIncomeExpenseTypeEvent());
-
     return SizedBox(
       width: (MediaQuery.of(context).size.width / 2) - 15,
       height: (MediaQuery.of(context).size.height - AppSizes.appBarHeight - 75),

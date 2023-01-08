@@ -1,16 +1,18 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:expense_planner/features/expense_planner/domain/income_expense_data/entities/income_expense_data_entity.dart';
+import 'package:expense_planner/features/expense_planner/presentation/common_widgets/message_widget.dart';
 import 'package:expense_planner/features/expense_planner/presentation/common_widgets/model_bottom_sheet_widget.dart';
 import 'package:expense_planner/features/expense_planner/presentation/income_expense/bloc/income_expense_bloc.dart';
 import 'package:expense_planner/features/expense_planner/presentation/income_expense/widgets/add_income_expense_data_widget.dart';
 import 'package:expense_planner/features/expense_planner/presentation/income_expense/widgets/income_expense_data_list_widget.dart';
+import 'package:expense_planner/helper/common_function.dart';
 import 'package:expense_planner/helper/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:expense_planner/features/expense_planner/presentation/common_bloc/common_bloc.dart';
-import 'package:expense_planner/features/expense_planner/presentation/common_widgets/const.dart';
+import 'package:expense_planner/features/expense_planner/presentation/common_widgets/app_ui_params.dart';
 import 'package:expense_planner/features/expense_planner/presentation/common_widgets/drop_down_widget.dart';
 import 'package:expense_planner/features/expense_planner/presentation/drawer/drawer_widget.dart';
 
@@ -96,46 +98,48 @@ class IncomeExpenseDataScreen extends StatelessWidget {
         ),
         child: BlocBuilder<IncomeExpenseBloc, IncomeExpenseState>(
           builder: (context, state) {
-            final commonState = context.select((CommonBloc bloc) => bloc.state);
-            final selectYear = commonState.selectedYear;
-            final selectMonth = commonState.selectedMonth;
+            if (state is IncomeExpenseDataLoaded) {
+              final commonState = context.select((CommonBloc bloc) => bloc.state);
+              final selectYear = commonState.selectedYear;
+              final selectMonth = commonState.selectedMonth;
 
-            // List<IncomeExpenseDataEntity> dataList = [];
+              String searchString = '';
 
-            String searchString = '';
-
-            if (yearList.indexOf(selectYear) != 0 && selectYear.isNotEmpty) {
-              searchString = '/$selectYear';
-              if (monthList.indexOf(selectMonth) != 0 && selectMonth.isNotEmpty) {
-                searchString = '/${monthList.indexOf(selectMonth)}/$selectYear';
-              } else {
+              if (yearList.indexOf(selectYear) != 0 && selectYear.isNotEmpty) {
                 searchString = '/$selectYear';
+                if (monthList.indexOf(selectMonth) != 0 && selectMonth.isNotEmpty) {
+                  searchString = '/${monthList.indexOf(selectMonth)}/$selectYear';
+                } else {
+                  searchString = '/$selectYear';
+                }
               }
+
+              final dataList = state.dataList
+                  .where((element) => (element.incomeExpenseTypeId == typeData[0] &&
+                      element.addDate.contains(searchString)))
+                  .toList();
+
+              final total = Functions().getTotalAmountFromList(dataList);
+
+              return Padding(
+                padding: EdgeInsets.only(top: AppSizes.appBarHeight, left: 10, right: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('${isIncomeCat == isIncome ? 'Income' : 'Expense'} - ${typeData[2]}',
+                        style: const TextStyle(
+                            fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold)),
+                    Text('${CurrencySymbol().currencySymbol} $total',
+                        style: const TextStyle(fontSize: 20, color: Colors.white)),
+                    const SizedBox(height: 10),
+                    IncomeExpenseDataListWidget(filterdList: dataList),
+                  ],
+                ),
+              );
+            } else if (state is ErrorState) {
+              return MessageWidget(message: state.message);
             }
-
-            final dataList = state.dataList
-                .where((element) => (element.incomeExpenseTypeId == typeData[0] &&
-                    element.addDate.contains(searchString)))
-                .toList();
-
-            final total = dataList.fold(
-                0.0, (previousValue, element) => previousValue += double.parse(element.amount));
-
-            return Padding(
-              padding: EdgeInsets.only(top: AppSizes.appBarHeight, left: 10, right: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('${isIncomeCat == isIncome ? 'Income' : 'Expense'} - ${typeData[2]}',
-                      style: const TextStyle(
-                          fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold)),
-                  Text('${CurrencySymbol().currencySymbol} $total',
-                      style: const TextStyle(fontSize: 20, color: Colors.white)),
-                  const SizedBox(height: 10),
-                  IncomeExpenseDataListWidget(filterdList: dataList),
-                ],
-              ),
-            );
+            return Container();
           },
         ),
       ),

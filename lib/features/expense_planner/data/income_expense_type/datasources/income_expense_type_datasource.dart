@@ -1,4 +1,4 @@
-import 'package:expense_planner/features/expense_planner/data/income_expense_type/income_type/models/income_expense_type_model.dart';
+import 'package:expense_planner/features/expense_planner/data/income_expense_type/models/income_expense_type_model.dart';
 import 'package:expense_planner/util/income_expense_type_db_helper.dart';
 
 abstract class IncomeExpenseTypeDatasource {

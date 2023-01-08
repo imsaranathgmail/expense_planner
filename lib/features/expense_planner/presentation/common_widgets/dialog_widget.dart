@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class DialogWidget {
   static Future<bool> showDialogBox(
     BuildContext context,
-    Color color,
+    Color bgColor,
     bool isConfDialog,
     String title,
     String content,
@@ -24,7 +24,7 @@ class DialogWidget {
           },
         );
         return AlertDialog(
-          backgroundColor: color,
+          backgroundColor: bgColor,
           title: Text(
             title,
             style: const TextStyle(fontWeight: FontWeight.bold),

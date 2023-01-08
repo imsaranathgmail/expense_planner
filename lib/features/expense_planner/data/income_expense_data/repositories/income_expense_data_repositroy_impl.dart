@@ -13,37 +13,53 @@ class IncomeExpenseDataRepositoryImpl implements IncomeExpenseDataRepository {
 
   @override
   Future<List<IncomeExpenseDataEntity>> fetchIncomeExpenseData() async {
-    final dataList = await incomeExpenseDatasource.fetchIncomeExpenseData();
-    return dataList;
+    try {
+      final dataList = await incomeExpenseDatasource.fetchIncomeExpenseData();
+      return dataList;
+    } on Exception {
+      return [];
+    }
   }
 
-  @override
-  Future<List<Map<String, dynamic>>> customeFetchQueryData(String sql) async {
-    final dataList = await incomeExpenseDatasource.customeFetchQueryData(sql);
-    return dataList;
-  }
+  // @override
+  // Future<List<Map<String, dynamic>>> customeFetchQueryData(String sql) async {
+  //   final dataList = await incomeExpenseDatasource.customeFetchQueryData(sql);
+  //   return dataList;
+  // }
 
   @override
   Future<bool> saveIncomeExpenseData(IncomeExpenseDataEntity incomeExpenseDataEntity) async {
-    final dataMap = incomeExpenseDataEntity.toMap();
-    final dataModel = IncomeExpenseDataModel.fromMap(dataMap);
-    final result = await incomeExpenseDatasource.saveIncomeExpenseData(dataModel);
-    return result;
+    try {
+      final dataMap = incomeExpenseDataEntity.toMap();
+      final dataModel = IncomeExpenseDataModel.fromMap(dataMap);
+      final result = await incomeExpenseDatasource.saveIncomeExpenseData(dataModel);
+      return result;
+    } on Exception {
+      return false;
+    }
   }
 
   @override
   Future<bool> updateIncomeExpenseData(IncomeExpenseDataEntity incomeExpenseDataEntity) async {
-    final dataMap = incomeExpenseDataEntity.toMap();
-    final dataModel = IncomeExpenseDataModel.fromMap(dataMap);
-    final result = await incomeExpenseDatasource.updateIncomeExpenseData(dataModel);
-    return result;
+    try {
+      final dataMap = incomeExpenseDataEntity.toMap();
+      final dataModel = IncomeExpenseDataModel.fromMap(dataMap);
+      final result = await incomeExpenseDatasource.updateIncomeExpenseData(dataModel);
+      return result;
+    } on Exception {
+      return false;
+    }
   }
 
   @override
   Future<bool> deleteIncomeExpenseData(IncomeExpenseDataEntity incomeExpenseDataEntity) async {
-    final dataMap = incomeExpenseDataEntity.toMap();
-    final dataModel = IncomeExpenseDataModel.fromMap(dataMap);
-    final result = await incomeExpenseDatasource.deleteIncomeExpenseData(dataModel);
-    return result;
+    try {
+      final dataMap = incomeExpenseDataEntity.toMap();
+      final dataModel = IncomeExpenseDataModel.fromMap(dataMap);
+      final result = await incomeExpenseDatasource.deleteIncomeExpenseData(dataModel);
+      return result;
+    } on Exception {
+      return false;
+    }
   }
 }

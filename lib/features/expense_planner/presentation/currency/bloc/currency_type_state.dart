@@ -1,18 +1,24 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first, overridden_fields
 part of 'currency_type_bloc.dart';
 
-class CurrencyTypeState extends Equatable {
+abstract class CurrencyTypeState extends Equatable {
   final List<CurrencyTypeEntity> currencyList;
   const CurrencyTypeState({
-    this.currencyList = const <CurrencyTypeEntity>[],
+    required this.currencyList,
   });
+}
 
+class CurrencyLoadedState extends CurrencyTypeState {
   @override
-  List<Object> get props => [currencyList];
+  final List<CurrencyTypeEntity> currencyList;
+  const CurrencyLoadedState({
+    required this.currencyList,
+  }) : super(currencyList: currencyList);
 
-  CurrencyTypeState copyWith({
+  CurrencyLoadedState copyWith({
     List<CurrencyTypeEntity>? currencyList,
   }) {
-    return CurrencyTypeState(
+    return CurrencyLoadedState(
       currencyList: currencyList ?? this.currencyList,
     );
   }
@@ -23,8 +29,8 @@ class CurrencyTypeState extends Equatable {
     };
   }
 
-  factory CurrencyTypeState.fromMap(Map<String, dynamic> map) {
-    return CurrencyTypeState(
+  factory CurrencyLoadedState.fromMap(Map<String, dynamic> map) {
+    return CurrencyLoadedState(
       currencyList: List<CurrencyTypeEntity>.from(
         (map['currencyList'] as List<int>).map<CurrencyTypeEntity>(
           (x) => CurrencyTypeEntity.fromMap(x as Map<String, dynamic>),
@@ -32,6 +38,17 @@ class CurrencyTypeState extends Equatable {
       ),
     );
   }
+
+  List<Object?> get props => [currencyList];
+}
+
+class ErrorState extends CurrencyTypeState {
+  final String message;
+
+  const ErrorState(this.message, {required super.currencyList});
+
+  @override
+  List<Object?> get props => [message];
 }
 
 

@@ -13,30 +13,46 @@ class CurrencyTypeRepositoryImpl implements CurrencyTypeRepository {
 
   @override
   Future<List<CurrencyTypeEntity>> fetchCurrencyType() async {
-    final dataList = await currencyTypeDatasource.fetchCurrencyType();
-    return dataList;
+    try {
+      final dataList = await currencyTypeDatasource.fetchCurrencyType();
+      return dataList;
+    } on Exception {
+      return [];
+    }
   }
 
   @override
   Future<bool> saveCurrencyType(CurrencyTypeEntity currencyTypeEntity) async {
-    final dataMap = currencyTypeEntity.toMap();
-    final dataModel = CurrencyTypeModel.fromMap(dataMap);
-    final result = await currencyTypeDatasource.saveCurrencyType(dataModel);
-    return result;
+    try {
+      final dataMap = currencyTypeEntity.toMap();
+      final dataModel = CurrencyTypeModel.fromMap(dataMap);
+      final result = await currencyTypeDatasource.saveCurrencyType(dataModel);
+      return result;
+    } on Exception {
+      return false;
+    }
   }
 
   @override
   Future<bool> updateCurrencyType(CurrencyTypeEntity currencyTypeEntity) async {
-    final dataMap = currencyTypeEntity.toMap();
-    final dataModel = CurrencyTypeModel.fromMap(dataMap);
-    final result = await currencyTypeDatasource.updateCurrencyType(dataModel);
-    return result;
+    try {
+      final dataMap = currencyTypeEntity.toMap();
+      final dataModel = CurrencyTypeModel.fromMap(dataMap);
+      final result = await currencyTypeDatasource.updateCurrencyType(dataModel);
+      return result;
+    } on Exception {
+      return false;
+    }
   }
 
   Future<bool> deleteCurrencyType(CurrencyTypeEntity currencyTypeEntity) async {
-    final dataMap = currencyTypeEntity.toMap();
-    final dataModel = CurrencyTypeModel.fromMap(dataMap);
-    final result = await currencyTypeDatasource.deleteCurrencyType(dataModel);
-    return result;
+    try {
+      final dataMap = currencyTypeEntity.toMap();
+      final dataModel = CurrencyTypeModel.fromMap(dataMap);
+      final result = await currencyTypeDatasource.deleteCurrencyType(dataModel);
+      return result;
+    } on Exception {
+      return false;
+    }
   }
 }

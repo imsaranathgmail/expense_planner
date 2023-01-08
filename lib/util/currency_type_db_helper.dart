@@ -14,7 +14,8 @@ class CurrencyTypeDBHelper {
 
   static Future<List<Map<String, dynamic>>> fetchData() async {
     final db = await DBHelper.database();
-    return db.query(CURRENCY_TYPE_TABLE);
+    List<Map<String, Object?>> resultList = await db.query(CURRENCY_TYPE_TABLE);
+    return resultList;
   }
 
   static Future<int> update(Map<String, dynamic> data) async {

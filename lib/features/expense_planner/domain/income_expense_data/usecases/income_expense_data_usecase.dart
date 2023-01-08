@@ -11,16 +11,16 @@ class FetchIncomeExpenseDataUsecase {
   }
 }
 
-class CustomeFetchQueryUsecase {
-  final IncomeExpenseDataRepository incomeExpenseDataRepository;
+// class CustomeFetchQueryUsecase {
+//   final IncomeExpenseDataRepository incomeExpenseDataRepository;
 
-  CustomeFetchQueryUsecase({
-    required this.incomeExpenseDataRepository,
-  });
-  Future<List<Map<String, dynamic>>> execute(String sql) async {
-    return incomeExpenseDataRepository.customeFetchQueryData(sql);
-  }
-}
+//   CustomeFetchQueryUsecase({
+//     required this.incomeExpenseDataRepository,
+//   });
+//   Future<List<Map<String, dynamic>>> execute(String sql) async {
+//     return incomeExpenseDataRepository.customeFetchQueryData(sql);
+//   }
+// }
 
 class AddIncomeExpenseDataUsecase {
   final IncomeExpenseDataRepository incomeExpenseDataRepository;

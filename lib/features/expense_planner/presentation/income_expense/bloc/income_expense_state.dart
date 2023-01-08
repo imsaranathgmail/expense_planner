@@ -1,21 +1,36 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first, overridden_fields
+
 part of 'income_expense_bloc.dart';
 
-class IncomeExpenseState extends Equatable {
+abstract class IncomeExpenseState extends Equatable {
   final List<IncomeExpenseTypeEntity> typeList;
   final List<IncomeExpenseDataEntity> dataList;
   const IncomeExpenseState({
-    this.typeList = const <IncomeExpenseTypeEntity>[],
-    this.dataList = const <IncomeExpenseDataEntity>[],
+    required this.typeList,
+    required this.dataList,
   });
-
   @override
-  List<Object> get props => [typeList, dataList];
+  List<Object?> get props => [typeList, dataList];
+}
 
-  IncomeExpenseState copyWith({
+class IncomeExpenseDataLoaded extends IncomeExpenseState {
+  @override
+  final List<IncomeExpenseTypeEntity> typeList;
+  @override
+  final List<IncomeExpenseDataEntity> dataList;
+
+  const IncomeExpenseDataLoaded({
+    required this.typeList,
+    required this.dataList,
+  }) : super(typeList: typeList, dataList: dataList);
+  @override
+  List<Object?> get props => [typeList, dataList];
+
+  IncomeExpenseDataLoaded copyWith({
     List<IncomeExpenseTypeEntity>? typeList,
     List<IncomeExpenseDataEntity>? dataList,
   }) {
-    return IncomeExpenseState(
+    return IncomeExpenseDataLoaded(
       typeList: typeList ?? this.typeList,
       dataList: dataList ?? this.dataList,
     );
@@ -28,8 +43,8 @@ class IncomeExpenseState extends Equatable {
     };
   }
 
-  factory IncomeExpenseState.fromMap(Map<String, dynamic> map) {
-    return IncomeExpenseState(
+  factory IncomeExpenseDataLoaded.fromMap(Map<String, dynamic> map) {
+    return IncomeExpenseDataLoaded(
       typeList: List<IncomeExpenseTypeEntity>.from(
         (map['typeList'] as List<int>).map<IncomeExpenseTypeEntity>(
           (x) => IncomeExpenseTypeEntity.fromMap(x as Map<String, dynamic>),
@@ -44,4 +59,8 @@ class IncomeExpenseState extends Equatable {
   }
 }
 
-class LoadingState extends IncomeExpenseState {}
+class ErrorState extends IncomeExpenseState {
+  final String message;
+
+  const ErrorState(this.message, {required super.typeList, required super.dataList});
+}
