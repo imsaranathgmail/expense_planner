@@ -1,8 +1,8 @@
-import 'package:expense_planner/features/expense_planner/presentation/currency/pages/currency_type_screen.dart';
+import 'package:expense_planner/features/expense_planner/presentation/pages/currency/currency_type_screen.dart';
 import 'package:expense_planner/features/expense_planner/presentation/dashboard.dart';
-import 'package:expense_planner/features/expense_planner/presentation/income_expense/pages/income_expense_data_screen.dart';
-import 'package:expense_planner/features/expense_planner/presentation/income_expense/pages/income_expense_screen.dart';
-import 'package:expense_planner/features/expense_planner/presentation/income_expense/pages/income_expense_type_screen.dart';
+import 'package:expense_planner/features/expense_planner/presentation/pages/income_expense/income_expense_data_screen.dart';
+import 'package:expense_planner/features/expense_planner/presentation/pages/income_expense/income_expense_screen.dart';
+import 'package:expense_planner/features/expense_planner/presentation/pages/income_expense/income_expense_type_screen.dart';
 
 import 'package:flutter/material.dart';
 
