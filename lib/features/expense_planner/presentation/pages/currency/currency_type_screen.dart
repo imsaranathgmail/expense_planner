@@ -10,7 +10,7 @@ import 'package:expense_planner/features/expense_planner/presentation/widgets/cu
 import 'package:expense_planner/features/expense_planner/presentation/pages/drawer/drawer_widget.dart';
 
 class CurrencyTypeScreen extends StatelessWidget {
-  static const id = 'CurrencyTypeScreen';
+  // static const id = 'CurrencyTypeScreen';
   const CurrencyTypeScreen({super.key});
 
   @override

@@ -9,7 +9,7 @@ import 'package:expense_planner/features/expense_planner/domain/entities/income_
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/button_widget.dart';
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/app_ui_params.dart';
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/dialog_widget.dart';
-import 'package:expense_planner/helper/constants.dart';
+import 'package:expense_planner/core/helper/constants.dart';
 
 class AddIncomeExpenseTypeWidget extends StatelessWidget {
   final IncomeExpenseTypeEntity? incomeExpenseTypeEntity;

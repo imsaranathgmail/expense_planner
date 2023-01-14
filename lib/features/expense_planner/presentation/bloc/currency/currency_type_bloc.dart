@@ -6,8 +6,7 @@ import 'package:equatable/equatable.dart';
 
 import 'package:expense_planner/features/expense_planner/domain/entities/currency/currency_type_entity.dart';
 import 'package:expense_planner/features/expense_planner/domain/usecases/currency/expense_type_usecase.dart';
-import 'package:expense_planner/helper/constants.dart';
-import 'package:expense_planner/injection_container.dart';
+import 'package:expense_planner/core/helper/constants.dart';
 
 part 'currency_type_event.dart';
 part 'currency_type_state.dart';

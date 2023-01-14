@@ -23,7 +23,6 @@ class CommonBloc extends Bloc<CommonEvent, CommonState> {
         selectedMonth: state.selectedMonth,
       ),
     );
-    Future.delayed(Duration(seconds: 1));
   }
 
   FutureOr<void> _onSelectedMonth(SelectMonth event, Emitter<CommonState> emit) {

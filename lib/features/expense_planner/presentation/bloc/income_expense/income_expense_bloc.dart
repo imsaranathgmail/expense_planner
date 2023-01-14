@@ -8,7 +8,7 @@ import 'package:expense_planner/features/expense_planner/domain/entities/income_
 import 'package:expense_planner/features/expense_planner/domain/usecases/income_expense_data/income_expense_data_usecase.dart';
 import 'package:expense_planner/features/expense_planner/domain/entities/income_expense_type/income_expense_type_entity.dart';
 import 'package:expense_planner/features/expense_planner/domain/usecases/income_expense_type/income_expense_type_usecase.dart';
-import 'package:expense_planner/helper/constants.dart';
+import 'package:expense_planner/core/helper/constants.dart';
 
 part 'income_expense_event.dart';
 part 'income_expense_state.dart';

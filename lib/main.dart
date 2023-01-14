@@ -10,8 +10,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:expense_planner/features/routing/app_router.dart';
 
-import 'injection_container.dart' as di;
-import 'injection_container.dart';
+import 'core/di/injection_container.dart' as di;
+import 'core/di/injection_container.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

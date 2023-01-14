@@ -1,9 +1,6 @@
-import 'package:expense_planner/features/expense_planner/presentation/pages/currency/currency_type_screen.dart';
-import 'package:expense_planner/features/expense_planner/presentation/dashboard.dart';
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/app_ui_params.dart';
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/glass_effect_widget.dart';
-import 'package:expense_planner/features/expense_planner/presentation/pages/income_expense/income_expense_screen.dart';
-import 'package:expense_planner/features/expense_planner/presentation/pages/income_expense/income_expense_type_screen.dart';
+import 'package:expense_planner/features/routing/Routes.dart';
 import 'package:flutter/material.dart';
 
 class DrawerWidget extends StatelessWidget {
@@ -29,7 +26,7 @@ class DrawerWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 20, right: 20),
             child: GestureDetector(
-              onTap: () => Navigator.of(context).pushReplacementNamed(DashboardScreen.id),
+              onTap: () => Navigator.of(context).pushReplacementNamed(Routes.dashboardScreen),
               child: const GlassEffectWidget(
                 child: Center(
                   child: Text(
@@ -44,7 +41,7 @@ class DrawerWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 20, right: 20, top: 5),
             child: GestureDetector(
-              onTap: () => Navigator.of(context).pushReplacementNamed(IncomeExpenseScreen.id),
+              onTap: () => Navigator.of(context).pushReplacementNamed(Routes.incomeExpenseScreen),
               child: const GlassEffectWidget(
                 child: Center(
                   child: Text(
@@ -60,7 +57,8 @@ class DrawerWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 20, right: 20, top: 5),
             child: GestureDetector(
-              onTap: () => Navigator.of(context).pushReplacementNamed(IncomeExpenseTypeScreen.id),
+              onTap: () =>
+                  Navigator.of(context).pushReplacementNamed(Routes.incomeExpenseTypeScreen),
               child: const GlassEffectWidget(
                 child: Center(
                   child: Text(
@@ -74,7 +72,7 @@ class DrawerWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
             child: GestureDetector(
-              onTap: () => Navigator.of(context).pushReplacementNamed(CurrencyTypeScreen.id),
+              onTap: () => Navigator.of(context).pushReplacementNamed(Routes.currencyTypeScreen),
               child: const GlassEffectWidget(
                 child: Center(
                   child: Text(

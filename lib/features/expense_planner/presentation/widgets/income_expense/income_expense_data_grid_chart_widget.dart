@@ -1,14 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable
 
 import 'package:expense_planner/features/expense_planner/presentation/bloc/income_expense/income_expense_bloc.dart';
-import 'package:expense_planner/helper/common_function.dart';
+import 'package:expense_planner/core/helper/common_function.dart';
+import 'package:expense_planner/features/routing/Routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import 'package:expense_planner/features/expense_planner/domain/entities/income_expense_type/income_expense_type_entity.dart';
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/app_ui_params.dart';
-import 'package:expense_planner/features/expense_planner/presentation/pages/income_expense/income_expense_data_screen.dart';
 
 class IncomeExpenseDataGridChartWidget extends StatelessWidget {
   int isIncomeCat;
@@ -81,7 +81,7 @@ class IncomeExpenseDataGridChartWidget extends StatelessWidget {
                   bottom: 5,
                   child: GestureDetector(
                     onTap: () => Navigator.of(context).pushNamed(
-                      IncomeExpenseDataScreen.id,
+                      Routes.incomeExpenseDataScreen,
                       arguments: [value.key, value.value, typeName, isIncomeCat],
                     ),
                     child: const Icon(

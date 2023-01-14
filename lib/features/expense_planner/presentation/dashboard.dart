@@ -9,13 +9,13 @@ import 'package:expense_planner/features/expense_planner/presentation/pages/dash
 import 'package:expense_planner/features/expense_planner/presentation/pages/drawer/drawer_widget.dart';
 
 import 'package:expense_planner/features/expense_planner/presentation/widgets/income_expense/add_income_expense_data_widget.dart';
-import 'package:expense_planner/helper/common_function.dart';
-import 'package:expense_planner/helper/constants.dart';
+import 'package:expense_planner/core/helper/common_function.dart';
+import 'package:expense_planner/core/helper/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DashboardScreen extends StatefulWidget {
-  static const id = 'DashboardScreen';
+  // static const id = 'DashboardScreen';
   const DashboardScreen({super.key});
 
   @override
