@@ -11,8 +11,8 @@ import 'package:expense_planner/features/expense_planner/data/datasources/curren
 import 'package:expense_planner/features/expense_planner/data/repositories/currency/currency_type_repositroy_impl.dart';
 import 'package:expense_planner/features/expense_planner/data/datasources/income_expense_data/income_expense_data_datasource.dart';
 import 'package:expense_planner/features/expense_planner/data/repositories/income_expense_data/income_expense_data_repositroy_impl.dart';
-import 'package:expense_planner/features/expense_planner/domain/repositories/currency/expense_type_repositroy.dart';
-import 'package:expense_planner/features/expense_planner/domain/usecases/currency/expense_type_usecase.dart';
+import 'package:expense_planner/features/expense_planner/domain/repositories/currency/currency_type_repositroy.dart';
+import 'package:expense_planner/features/expense_planner/domain/usecases/currency/currency_type_usecase.dart';
 import 'package:expense_planner/features/expense_planner/domain/repositories/income_expense_data/income_expense_data_repositroy.dart';
 import 'package:expense_planner/features/expense_planner/domain/usecases/income_expense_data/income_expense_data_usecase.dart';
 

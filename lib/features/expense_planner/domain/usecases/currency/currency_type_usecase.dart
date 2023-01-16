@@ -1,5 +1,5 @@
 import 'package:expense_planner/features/expense_planner/domain/entities/currency/currency_type_entity.dart';
-import 'package:expense_planner/features/expense_planner/domain/repositories/currency/expense_type_repositroy.dart';
+import 'package:expense_planner/features/expense_planner/domain/repositories/currency/currency_type_repositroy.dart';
 
 class FetchCurrencyTypeUsecase {
   final CurrencyTypeRepository currencyTypeRepository;

@@ -12,7 +12,6 @@ class IncomeTypeDatasourceImpl implements IncomeExpenseTypeDatasource {
   @override
   Future<List<IncomeExpenseTypeModel>> fetchIncomeExpenseType() async {
     final incomeExpenseTypeList = await IncomeExpenseTypeDBHelper.fetchData();
-    // print(incomeExpenseTypeList);
     final result =
         incomeExpenseTypeList.map((type) => IncomeExpenseTypeModel.fromMap(type)).toList();
     return result;

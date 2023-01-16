@@ -3,6 +3,7 @@ import 'package:expense_planner/core/util/db_helper.dart';
 import 'package:sqflite/sqflite.dart';
 
 class CurrencyTypeDBHelper {
+  CurrencyTypeDBHelper._();
   static Future<int> insert(Map<String, dynamic> data) async {
     final db = await DBHelper.database();
     return db.insert(

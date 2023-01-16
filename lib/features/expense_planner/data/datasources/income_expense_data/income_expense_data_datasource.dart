@@ -13,7 +13,6 @@ class IncomeExpenseDatasourceImpl implements IncomeExpenseDatasource {
   @override
   Future<List<IncomeExpenseDataModel>> fetchIncomeExpenseData() async {
     final incomeExpenseDataList = await IncomeExpenseDataDBHelper.fetchData();
-    // print(incomeExpenseDataList);
     final result =
         incomeExpenseDataList.map((type) => IncomeExpenseDataModel.fromMap(type)).toList();
     // print(result);

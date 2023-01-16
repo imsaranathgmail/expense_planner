@@ -47,6 +47,7 @@ class IncomeExpenseBloc extends Bloc<IncomeExpenseEvent, IncomeExpenseState> {
   }
 
 //! Income Expense Type
+
   FutureOr<void> _onFetchIncomeExpenseType(
       FetchIncomeExpenseType event, Emitter<IncomeExpenseState> emit) async {
     final state = this.state;
@@ -118,8 +119,8 @@ class IncomeExpenseBloc extends Bloc<IncomeExpenseEvent, IncomeExpenseState> {
       List<IncomeExpenseTypeEntity> typeList = state.typeList;
       List<IncomeExpenseDataEntity> dataList = state.dataList;
 
-      typeList = List.from(typeList)..removeWhere((element) => element.id == dataEntity.id);
-      dataList = List.from(dataList)
+      typeList = List.from(state.typeList)..removeWhere((element) => element.id == dataEntity.id);
+      dataList = List.from(state.dataList)
         ..removeWhere((element) => element.incomeExpenseTypeId == dataEntity.id);
       emit(
         IncomeExpenseDataLoaded(

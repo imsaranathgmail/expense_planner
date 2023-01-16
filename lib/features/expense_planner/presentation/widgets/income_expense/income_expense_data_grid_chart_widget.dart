@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable
 
+import 'package:expense_planner/core/helper/constants.dart';
+import 'package:expense_planner/core/helper/currency_symbol_holder.dart';
 import 'package:expense_planner/features/expense_planner/presentation/bloc/income_expense/income_expense_bloc.dart';
-import 'package:expense_planner/core/helper/common_function.dart';
+import 'package:expense_planner/core/helper/list_map_function.dart';
 import 'package:expense_planner/features/routing/Routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,7 +50,8 @@ class IncomeExpenseDataGridChartWidget extends StatelessWidget {
               children: [
                 Card(
                   elevation: 5,
-                  color: isIncomeCat == 1 ? AppColor.gradientColor01 : AppColor.gradientColor02,
+                  color:
+                      isIncomeCat == isIncome ? AppColor.gradientColor01 : AppColor.gradientColor02,
                   child: SfCircularChart(
                     series: <CircularSeries>[
                       RadialBarSeries<ChartData, String>(
@@ -72,7 +75,7 @@ class IncomeExpenseDataGridChartWidget extends StatelessWidget {
                 Positioned(
                   bottom: 15,
                   left: 20,
-                  child: Text('${CurrencySymbol().currencySymbol} ${value.value}',
+                  child: Text('${CurrencySymbolHolder.currencySymbol} ${value.value}',
                       style: const TextStyle(
                           fontSize: 13, color: Colors.white, fontWeight: FontWeight.bold)),
                 ),

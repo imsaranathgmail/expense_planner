@@ -1,10 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+import 'package:expense_planner/core/helper/currency_symbol_holder.dart';
 import 'package:expense_planner/features/expense_planner/presentation/bloc/common_bloc/common_bloc.dart';
 import 'package:expense_planner/features/expense_planner/presentation/bloc/income_expense/income_expense_bloc.dart';
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/message_widget.dart';
 import 'package:expense_planner/features/expense_planner/presentation/widgets/income_expense/income_expense_data_list_widget.dart';
-import 'package:expense_planner/core/helper/common_function.dart';
+import 'package:expense_planner/core/helper/list_map_function.dart';
 import 'package:expense_planner/core/helper/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -116,7 +117,7 @@ class IncomeExpenseDataScreen extends StatelessWidget {
                       element.addDate.contains(searchString)))
                   .toList();
 
-              final total = Functions().getTotalAmountFromList(dataList);
+              final total = ListMapFunctions.getTotalAmountFromList(dataList);
 
               return Padding(
                 padding: EdgeInsets.only(top: AppSizes.appBarHeight, left: 10, right: 10),
@@ -126,7 +127,7 @@ class IncomeExpenseDataScreen extends StatelessWidget {
                     Text('${isIncomeCat == isIncome ? 'Income' : 'Expense'} - ${typeData[2]}',
                         style: const TextStyle(
                             fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold)),
-                    Text('${CurrencySymbol().currencySymbol} $total',
+                    Text('${CurrencySymbolHolder.currencySymbol} $total',
                         style: const TextStyle(fontSize: 20, color: Colors.white)),
                     const SizedBox(height: 10),
                     IncomeExpenseDataListWidget(filterdList: dataList),

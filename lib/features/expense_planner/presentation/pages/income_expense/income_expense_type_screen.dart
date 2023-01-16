@@ -1,5 +1,5 @@
 import 'package:expense_planner/features/expense_planner/presentation/bloc/income_expense/income_expense_bloc.dart';
-import 'package:expense_planner/features/expense_planner/presentation/pages/pages/income_expense_type_list_view_widget.dart';
+import 'package:expense_planner/features/expense_planner/presentation/pages/income_expense/income_expense_type_list_view_widget.dart';
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/app_ui_params.dart';
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/message_widget.dart';
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/model_bottom_sheet_widget.dart';

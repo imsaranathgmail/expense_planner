@@ -1,5 +1,6 @@
+import 'package:expense_planner/core/helper/currency_symbol_holder.dart';
 import 'package:expense_planner/features/expense_planner/presentation/bloc/income_expense/income_expense_bloc.dart';
-import 'package:expense_planner/core/helper/common_function.dart';
+import 'package:expense_planner/core/helper/list_map_function.dart';
 import 'package:expense_planner/core/helper/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,7 +39,7 @@ class DashboardSummery extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: Text('${CurrencySymbol().currencySymbol} $myBalance',
+              child: Text('${CurrencySymbolHolder.currencySymbol} $myBalance',
                   style: const TextStyle(fontSize: 35, color: Colors.white)),
             ),
             Row(
@@ -62,7 +63,7 @@ class DashboardSummery extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(
-                        '${CurrencySymbol().currencySymbol} $totalIncome',
+                        '${CurrencySymbolHolder.currencySymbol} $totalIncome',
                         style: const TextStyle(
                           fontSize: 25,
                           color: Colors.white,
@@ -88,7 +89,7 @@ class DashboardSummery extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(right: 10),
-                      child: Text('${CurrencySymbol().currencySymbol} $totalExpense',
+                      child: Text('${CurrencySymbolHolder.currencySymbol} $totalExpense',
                           style: const TextStyle(fontSize: 25, color: Colors.white)),
                     ),
                   ],

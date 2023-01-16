@@ -1,14 +1,15 @@
+import 'package:expense_planner/core/helper/currency_symbol_holder.dart';
 import 'package:expense_planner/features/expense_planner/domain/entities/income_expense_data/income_expense_data_entity.dart';
 import 'package:expense_planner/features/expense_planner/presentation/bloc/common_bloc/common_bloc.dart';
 import 'package:expense_planner/features/expense_planner/presentation/bloc/income_expense/income_expense_bloc.dart';
-import 'package:expense_planner/features/expense_planner/presentation/pages/pages/income_expense_chart_column_widget.dart';
+import 'package:expense_planner/features/expense_planner/presentation/pages/income_expense/income_expense_chart_column_widget.dart';
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/app_ui_params.dart';
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/drop_down_widget.dart';
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/message_widget.dart';
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/model_bottom_sheet_widget.dart';
 import 'package:expense_planner/features/expense_planner/presentation/pages/drawer/drawer_widget.dart';
 import 'package:expense_planner/features/expense_planner/presentation/widgets/income_expense/add_income_expense_data_widget.dart';
-import 'package:expense_planner/core/helper/common_function.dart';
+import 'package:expense_planner/core/helper/list_map_function.dart';
 import 'package:expense_planner/core/helper/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -119,18 +120,22 @@ class IncomeExpenseScreen extends StatelessWidget {
               }
 
               List<IncomeExpenseDataEntity> incomeDataList =
-                  Functions().getFilteredListYearMonthWice(state, searchString, isIncome);
-              double totalIncome = Functions().getTotalAmountFromList(incomeDataList);
+                  ListMapFunctions.getFilteredListYearMonthWice(
+                      state.dataList, searchString, isIncome);
+              double totalIncome = ListMapFunctions.getTotalAmountFromList(incomeDataList);
               List<MapEntry<String, double>> incomeDataMap =
-                  Functions().getIncomeOrExpenseGroupWiceAmountMap(incomeDataList).entries.toList();
+                  ListMapFunctions.getIncomeOrExpenseGroupWiceAmountMap(incomeDataList)
+                      .entries
+                      .toList();
 
               List<IncomeExpenseDataEntity> expenseDataList =
-                  Functions().getFilteredListYearMonthWice(state, searchString, isExpense);
-              double totalExpense = Functions().getTotalAmountFromList(expenseDataList);
-              List<MapEntry<String, double>> expenseDataMap = Functions()
-                  .getIncomeOrExpenseGroupWiceAmountMap(expenseDataList)
-                  .entries
-                  .toList();
+                  ListMapFunctions.getFilteredListYearMonthWice(
+                      state.dataList, searchString, isExpense);
+              double totalExpense = ListMapFunctions.getTotalAmountFromList(expenseDataList);
+              List<MapEntry<String, double>> expenseDataMap =
+                  ListMapFunctions.getIncomeOrExpenseGroupWiceAmountMap(expenseDataList)
+                      .entries
+                      .toList();
 
               return Padding(
                 padding: EdgeInsets.only(top: AppSizes.appBarHeight, left: 10, right: 10),
@@ -140,7 +145,7 @@ class IncomeExpenseScreen extends StatelessWidget {
                     children: [
                       Center(
                         child: Text(
-                            'Balance - ${CurrencySymbol().currencySymbol} ${totalIncome - totalExpense}',
+                            'Balance - ${CurrencySymbolHolder.currencySymbol} ${totalIncome - totalExpense}',
                             style: const TextStyle(
                                 fontSize: 15, color: Colors.white, fontWeight: FontWeight.bold)),
                       ),
@@ -156,7 +161,7 @@ class IncomeExpenseScreen extends StatelessWidget {
                                       fontSize: 20,
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold)),
-                              Text('${CurrencySymbol().currencySymbol} $totalIncome',
+                              Text('${CurrencySymbolHolder.currencySymbol} $totalIncome',
                                   style: const TextStyle(fontSize: 15, color: Colors.white)),
                               const SizedBox(height: 10),
                             ],
@@ -169,7 +174,7 @@ class IncomeExpenseScreen extends StatelessWidget {
                                       fontSize: 20,
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold)),
-                              Text('${CurrencySymbol().currencySymbol} $totalExpense',
+                              Text('${CurrencySymbolHolder.currencySymbol} $totalExpense',
                                   style: const TextStyle(fontSize: 15, color: Colors.white)),
                               const SizedBox(height: 10),
                             ],
@@ -181,11 +186,13 @@ class IncomeExpenseScreen extends StatelessWidget {
                           IncomeExpenseChartColumnWidget(
                             incomeDataMap: incomeDataMap,
                             totalIncome: totalIncome,
+                            isIncomeCat: isIncome,
                           ),
                           const SizedBox(width: 10),
                           IncomeExpenseChartColumnWidget(
                             incomeDataMap: expenseDataMap,
                             totalIncome: totalExpense,
+                            isIncomeCat: isExpense,
                           ),
                         ],
                       ),

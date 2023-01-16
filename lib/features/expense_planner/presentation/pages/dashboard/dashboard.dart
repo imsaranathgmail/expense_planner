@@ -9,7 +9,7 @@ import 'package:expense_planner/features/expense_planner/presentation/pages/dash
 import 'package:expense_planner/features/expense_planner/presentation/pages/drawer/drawer_widget.dart';
 
 import 'package:expense_planner/features/expense_planner/presentation/widgets/income_expense/add_income_expense_data_widget.dart';
-import 'package:expense_planner/core/helper/common_function.dart';
+import 'package:expense_planner/core/helper/list_map_function.dart';
 import 'package:expense_planner/core/helper/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,17 +27,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   void initState() {
     BlocProvider.of<IncomeExpenseBloc>(context).add(FetchBothTypeAndData());
-    Future.delayed(const Duration(milliseconds: 250));
     BlocProvider.of<CurrencyTypeBloc>(context).add(FetchCurrency());
-    Future.delayed(const Duration(milliseconds: 250));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final currList = context.select((CurrencyTypeBloc bloc) => bloc.state).currencyList;
-    currSymb = currList.isNotEmpty ? currList.first.currencySymbol : '';
-    CurrencySymbol().setCurrencySymbol(currSymb);
+    // final currList = context.select((CurrencyTypeBloc bloc) => bloc.state).currencyList;
+    // currSymb = currList.isNotEmpty ? currList.first.currencySymbol : '';
+    // CurrencySymbol.setCurrencySymbol(currSymb);
     return Scaffold(
       extendBodyBehindAppBar: true,
       drawer: const DrawerWidget(),

@@ -5,6 +5,7 @@ import 'package:sqflite/sqflite.dart' as sql;
 import 'package:path/path.dart' as path;
 
 class DBHelper {
+  DBHelper._();
   static Future<Database> database() async {
     final dbPath = await sql.getDatabasesPath();
     return sql.openDatabase(path.join(dbPath, 'expense_planner.db'), onCreate: (db, version) {
@@ -24,14 +25,10 @@ class DBHelper {
 	                    isIncome	INTEGER,
 	                    incomeExpenseTypeId	TEXT,
 	                  FOREIGN KEY(incomeExpenseTypeId) REFERENCES income_expense_type(id)
-                       
+
             )''');
       db.execute(
           'create table currency_type(id TEXT PRIMARY KEY,currencyName TEXT,currencySymbol TEXT)');
     }, version: 1);
   }
-
-  // static Future _onConfigure(Database db) async {
-  //   await
-  // }
 }

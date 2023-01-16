@@ -6,10 +6,12 @@ import 'package:flutter/material.dart';
 class IncomeExpenseChartColumnWidget extends StatelessWidget {
   final List<MapEntry<String, double>> incomeDataMap;
   final double totalIncome;
+  final int isIncomeCat;
   const IncomeExpenseChartColumnWidget({
     Key? key,
     required this.incomeDataMap,
     required this.totalIncome,
+    required this.isIncomeCat,
   }) : super(key: key);
 
   @override
@@ -21,7 +23,7 @@ class IncomeExpenseChartColumnWidget extends StatelessWidget {
         child: Column(
           children: [
             IncomeExpenseDataGridChartWidget(
-              isIncomeCat: isIncome,
+              isIncomeCat: isIncomeCat,
               filteredMap: incomeDataMap,
               totalIncome: double.parse(
                 totalIncome.toString(),

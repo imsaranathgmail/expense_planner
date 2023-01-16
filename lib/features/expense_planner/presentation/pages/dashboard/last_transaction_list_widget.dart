@@ -1,7 +1,8 @@
+import 'package:expense_planner/core/helper/currency_symbol_holder.dart';
 import 'package:expense_planner/features/expense_planner/presentation/bloc/income_expense/income_expense_bloc.dart';
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/app_ui_params.dart';
 
-import 'package:expense_planner/core/helper/common_function.dart';
+import 'package:expense_planner/core/helper/list_map_function.dart';
 import 'package:expense_planner/core/helper/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,7 +35,7 @@ class LastTransactionListWidget extends StatelessWidget {
                   ),
                   title: Text(dataEntity.description,
                       style: const TextStyle(fontSize: 20, color: Colors.white)),
-                  subtitle: Text('${CurrencySymbol().currencySymbol} ${dataEntity.amount}',
+                  subtitle: Text('${CurrencySymbolHolder.currencySymbol} ${dataEntity.amount}',
                       style: const TextStyle(fontSize: 20, color: Colors.white)),
                   trailing: Padding(
                     padding: const EdgeInsets.only(right: 5),
