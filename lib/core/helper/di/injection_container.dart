@@ -5,6 +5,7 @@ import 'package:expense_planner/features/expense_planner/domain/usecases/income_
 import 'package:expense_planner/features/expense_planner/presentation/bloc/common_bloc/common_bloc.dart';
 import 'package:expense_planner/features/expense_planner/presentation/bloc/currency/currency_type_bloc.dart';
 import 'package:expense_planner/features/expense_planner/presentation/bloc/income_expense/income_expense_bloc.dart';
+import 'package:expense_planner/features/expense_planner/presentation/bloc/language/language_bloc.dart';
 
 import 'package:get_it/get_it.dart';
 import 'package:expense_planner/features/expense_planner/data/datasources/currency/currency_type_datasource.dart';
@@ -25,6 +26,7 @@ Future<void> init() async {
   sl.registerFactory(() => CommonBloc());
   sl.registerFactory(() => CurrencyTypeBloc(sl(), sl(), sl()));
   sl.registerFactory(() => IncomeExpenseBloc(sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl()));
+  sl.registerFactory(() => LanguageBloc());
 
   //! Usecase
   //? Income Expense Type Usecase

@@ -1,9 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable
 
-import 'package:expense_planner/core/helper/constants.dart';
-import 'package:expense_planner/core/helper/currency_symbol_holder.dart';
+import 'package:expense_planner/core/constants/app_constants.dart';
+import 'package:expense_planner/core/helper/functions/currency_symbol_holder.dart';
 import 'package:expense_planner/features/expense_planner/presentation/bloc/income_expense/income_expense_bloc.dart';
-import 'package:expense_planner/core/helper/list_map_function.dart';
+import 'package:expense_planner/features/expense_planner/presentation/chart_data/chart_data.dart';
 import 'package:expense_planner/features/routing/Routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,7 +34,7 @@ class IncomeExpenseDataGridChartWidget extends StatelessWidget {
         children: filteredMap.map(
           (value) {
             // print(value);
-            List<ChartData> chartData = [];
+            List<PieChartData> chartData = [];
             var typeName = 'Income Type';
 
             final list = BlocProvider.of<IncomeExpenseBloc>(context).state.typeList;
@@ -43,7 +43,7 @@ class IncomeExpenseDataGridChartWidget extends StatelessWidget {
                 .first
                 .typeName;
 
-            chartData.add(ChartData(typeName, double.parse(value.value.toString())));
+            chartData.add(PieChartData(typeName, double.parse(value.value.toString())));
             // chartData.add(ChartData(value['typeName'], value['totAmount'].toDouble()));
 
             return Stack(
@@ -54,12 +54,12 @@ class IncomeExpenseDataGridChartWidget extends StatelessWidget {
                       isIncomeCat == isIncome ? AppColor.gradientColor01 : AppColor.gradientColor02,
                   child: SfCircularChart(
                     series: <CircularSeries>[
-                      RadialBarSeries<ChartData, String>(
+                      RadialBarSeries<PieChartData, String>(
                         maximumValue: totalIncome ?? 0,
                         cornerStyle: CornerStyle.endCurve,
                         dataSource: chartData,
-                        xValueMapper: (ChartData data, _) => data.x,
-                        yValueMapper: (ChartData data, _) => data.y,
+                        xValueMapper: (PieChartData data, _) => data.x,
+                        yValueMapper: (PieChartData data, _) => data.y,
                         radius: '70%',
                       ),
                     ],
@@ -103,14 +103,7 @@ class IncomeExpenseDataGridChartWidget extends StatelessWidget {
   }
 }
 
-class ChartData {
-  ChartData(
-    this.x,
-    this.y,
-  );
-  final String x;
-  final double y;
-}
+
 
 
 

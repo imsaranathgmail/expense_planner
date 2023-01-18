@@ -1,12 +1,13 @@
-import 'package:expense_planner/core/helper/constants.dart';
-import 'package:expense_planner/core/util/db_helper.dart';
+import 'package:expense_planner/core/constants/app_constants.dart';
+import 'package:expense_planner/core/helper/db_util/db_helper.dart';
 import 'package:sqflite/sqflite.dart';
 
-class IncomeExpenseTypeDBHelper {
+class CurrencyTypeDBHelper {
+  CurrencyTypeDBHelper._();
   static Future<int> insert(Map<String, dynamic> data) async {
     final db = await DBHelper.database();
     return db.insert(
-      INCOME_EXPENSE_TYPE_TABLE,
+      CURRENCY_TYPE_TABLE,
       data,
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
@@ -14,18 +15,17 @@ class IncomeExpenseTypeDBHelper {
 
   static Future<List<Map<String, dynamic>>> fetchData() async {
     final db = await DBHelper.database();
-    return db.query(INCOME_EXPENSE_TYPE_TABLE, orderBy: 'isIncomeType DESC');
+    List<Map<String, Object?>> resultList = await db.query(CURRENCY_TYPE_TABLE);
+    return resultList;
   }
 
   static Future<int> update(Map<String, dynamic> data) async {
     final db = await DBHelper.database();
-    return db.update(INCOME_EXPENSE_TYPE_TABLE, data, where: 'id=?', whereArgs: [data['id']]);
+    return db.update(CURRENCY_TYPE_TABLE, data, where: 'id=?', whereArgs: [data['id']]);
   }
 
   static Future<int> delete(Map<String, dynamic> data) async {
     final db = await DBHelper.database();
-    await db
-        .delete(INCOME_EXPENSE_DATA_TABLE, where: 'incomeExpenseTypeId=?', whereArgs: [data['id']]);
-    return db.delete(INCOME_EXPENSE_TYPE_TABLE, where: 'id=?', whereArgs: [data['id']]);
+    return db.delete(CURRENCY_TYPE_TABLE, where: 'id=?', whereArgs: [data['id']]);
   }
 }

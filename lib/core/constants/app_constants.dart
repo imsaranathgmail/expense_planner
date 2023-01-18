@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 //! Database Table Names
+
 const INCOME_EXPENSE_TYPE_TABLE = 'income_expense_type';
 const INCOME_EXPENSE_DATA_TABLE = 'income_expense_data';
 const CURRENCY_TYPE_TABLE = 'currency_type';

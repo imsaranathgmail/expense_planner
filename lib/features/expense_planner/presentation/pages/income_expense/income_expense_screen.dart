@@ -1,4 +1,6 @@
-import 'package:expense_planner/core/helper/currency_symbol_holder.dart';
+import 'package:expense_planner/core/extentions/app_extentions.dart';
+import 'package:expense_planner/core/helper/functions/currency_symbol_holder.dart';
+import 'package:expense_planner/core/language/language_constants.dart';
 import 'package:expense_planner/features/expense_planner/domain/entities/income_expense_data/income_expense_data_entity.dart';
 import 'package:expense_planner/features/expense_planner/presentation/bloc/common_bloc/common_bloc.dart';
 import 'package:expense_planner/features/expense_planner/presentation/bloc/income_expense/income_expense_bloc.dart';
@@ -9,8 +11,8 @@ import 'package:expense_planner/features/expense_planner/presentation/widgets/co
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/model_bottom_sheet_widget.dart';
 import 'package:expense_planner/features/expense_planner/presentation/pages/drawer/drawer_widget.dart';
 import 'package:expense_planner/features/expense_planner/presentation/widgets/income_expense/add_income_expense_data_widget.dart';
-import 'package:expense_planner/core/helper/list_map_function.dart';
-import 'package:expense_planner/core/helper/constants.dart';
+import 'package:expense_planner/core/helper/functions/list_map_function.dart';
+import 'package:expense_planner/core/constants/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,9 +23,8 @@ class IncomeExpenseScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> monthListData = ['Month'];
     String selectedYear = yearList[0];
-    String selectedMonth = monthListData[0];
+    String selectedMonth = monthList[0];
 
     return Scaffold(
       // key: _scaffoldSate,
@@ -43,7 +44,7 @@ class IncomeExpenseScreen extends StatelessWidget {
                   onChanged: (value) {
                     BlocProvider.of<CommonBloc>(context)
                         .add(SelectYear(selectedYear: value.toString()));
-                    monthListData = monthList;
+
                     selectedYear = value.toString();
                   },
                 );
@@ -55,7 +56,7 @@ class IncomeExpenseScreen extends StatelessWidget {
                 return DropDwonWidget(
                   isYearMonth: true,
                   isExpanded: false,
-                  items: monthListData,
+                  items: monthList,
                   value: state.selectedMonth.isNotEmpty ? state.selectedMonth : selectedMonth,
                   onChanged: (value) {
                     BlocProvider.of<CommonBloc>(context)
@@ -111,11 +112,15 @@ class IncomeExpenseScreen extends StatelessWidget {
               String searchString = '';
 
               if (yearList.indexOf(selectYear) != 0 && selectYear.isNotEmpty) {
-                searchString = '/$selectYear';
+                searchString = selectYear;
                 if (monthList.indexOf(selectMonth) != 0 && selectMonth.isNotEmpty) {
-                  searchString = '/${monthList.indexOf(selectMonth)}/$selectYear';
+                  if (monthList.indexOf(selectMonth) < 10) {
+                    searchString = '$selectYear-0${monthList.indexOf(selectMonth)}';
+                  } else {
+                    searchString = '$selectYear-${monthList.indexOf(selectMonth)}';
+                  }
                 } else {
-                  searchString = '/$selectYear';
+                  searchString = selectYear;
                 }
               }
 
@@ -145,7 +150,7 @@ class IncomeExpenseScreen extends StatelessWidget {
                     children: [
                       Center(
                         child: Text(
-                            'Balance - ${CurrencySymbolHolder.currencySymbol} ${totalIncome - totalExpense}',
+                            '${LanguageConstants.balance.t(context)} - ${CurrencySymbolHolder.currencySymbol} ${totalIncome - totalExpense}',
                             style: const TextStyle(
                                 fontSize: 15, color: Colors.white, fontWeight: FontWeight.bold)),
                       ),
@@ -156,8 +161,8 @@ class IncomeExpenseScreen extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text('Income Summery',
-                                  style: TextStyle(
+                              Text(LanguageConstants.incomeSummary.t(context),
+                                  style: const TextStyle(
                                       fontSize: 20,
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold)),
@@ -169,8 +174,8 @@ class IncomeExpenseScreen extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              const Text('Expense Summery',
-                                  style: TextStyle(
+                              Text(LanguageConstants.expenseSummary.t(context),
+                                  style: const TextStyle(
                                       fontSize: 20,
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold)),

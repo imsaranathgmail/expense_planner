@@ -1,5 +1,5 @@
-import 'package:expense_planner/core/helper/constants.dart';
-import 'package:expense_planner/core/util/db_helper.dart';
+import 'package:expense_planner/core/constants/app_constants.dart';
+import 'package:expense_planner/core/helper/db_util/db_helper.dart';
 import 'package:sqflite/sqflite.dart';
 
 class IncomeExpenseDataDBHelper {

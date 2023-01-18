@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:expense_planner/features/expense_planner/data/models/currency/currency_type_model.dart';
-import 'package:expense_planner/core/util/currency_type_db_helper.dart';
+import 'package:expense_planner/core/helper/db_util/currency_type_db_helper.dart';
 
 abstract class CurrencyTypeDatasource {
   Future<List<CurrencyTypeModel>> fetchCurrencyType();

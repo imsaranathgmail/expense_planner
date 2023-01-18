@@ -1,3 +1,5 @@
+import 'package:expense_planner/core/extentions/app_extentions.dart';
+import 'package:expense_planner/core/language/language_constants.dart';
 import 'package:expense_planner/features/expense_planner/presentation/bloc/income_expense/income_expense_bloc.dart';
 import 'package:expense_planner/features/expense_planner/presentation/pages/income_expense/income_expense_type_list_view_widget.dart';
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/app_ui_params.dart';
@@ -5,7 +7,7 @@ import 'package:expense_planner/features/expense_planner/presentation/widgets/co
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/model_bottom_sheet_widget.dart';
 import 'package:expense_planner/features/expense_planner/presentation/pages/drawer/drawer_widget.dart';
 import 'package:expense_planner/features/expense_planner/presentation/widgets/income_expense/add_income_expense_type_widget.dart';
-import 'package:expense_planner/core/helper/constants.dart';
+import 'package:expense_planner/core/constants/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -66,9 +68,9 @@ class IncomeExpenseTypeScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'Income Category',
-                            style: TextStyle(
+                          Text(
+                            LanguageConstants.incomeCategory.t(context),
+                            style: const TextStyle(
                               fontSize: 20,
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -78,9 +80,9 @@ class IncomeExpenseTypeScreen extends StatelessWidget {
                           // incomeExpenseListView(state.typeList, isIncome),
                           IncomeExpenseListViewWidget(dataList: state.typeList, type: isIncome),
                           const SizedBox(height: 10),
-                          const Text(
-                            'Expense Category',
-                            style: TextStyle(
+                          Text(
+                            LanguageConstants.expenseCategory.t(context),
+                            style: const TextStyle(
                               fontSize: 20,
                               color: Colors.white,
                               fontWeight: FontWeight.bold,

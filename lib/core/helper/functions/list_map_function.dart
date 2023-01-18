@@ -2,7 +2,6 @@
 import 'package:collection/collection.dart';
 
 import 'package:expense_planner/features/expense_planner/domain/entities/income_expense_data/income_expense_data_entity.dart';
-import 'package:expense_planner/features/expense_planner/presentation/bloc/income_expense/income_expense_bloc.dart';
 
 class ListMapFunctions {
   ListMapFunctions._();
@@ -25,7 +24,7 @@ class ListMapFunctions {
     return filterList.groupFoldBy<String, double>(
         (element) => element.incomeExpenseTypeId,
         (previous, element) => (previous != null
-            ? previous += int.parse(element.amount)
+            ? previous += double.parse(element.amount)
             : double.parse(element.amount)));
   }
 }

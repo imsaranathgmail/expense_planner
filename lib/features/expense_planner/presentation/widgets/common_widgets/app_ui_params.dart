@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class AppColor {
   //Drawer and scaffold
@@ -18,7 +19,8 @@ class AppColor {
 class AppFontSize {
   //drawer and scaffold
   static const double f25 = 35.0;
-
+  static const double fD18 = 18.0;
+  static const double fD15 = 15.0;
   //Dashboard
   static const double f15 = 15.0;
   static const double f10 = 10.0;
@@ -29,6 +31,5 @@ class AppSizes {
 }
 
 class AppGloable {
-  static String selectedDate =
-      '${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}';
+  static String selectedDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
 }
