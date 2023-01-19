@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable
+import 'package:expense_planner/core/extentions/app_extentions.dart';
+import 'package:expense_planner/core/language/language_constants.dart';
 import 'package:flutter/material.dart';
 
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/app_ui_params.dart';
@@ -30,9 +32,10 @@ class DropDwonWidget extends StatelessWidget {
       iconSize: 45,
       hint: isYearMonth
           ? null
-          : const Padding(
-              padding: EdgeInsets.only(left: 10),
-              child: Text('Select Type', style: TextStyle(color: Colors.white)),
+          : Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(LanguageConstants.selectType.t(context),
+                  style: const TextStyle(color: Colors.white)),
             ),
       value: value,
       onChanged: onChanged,

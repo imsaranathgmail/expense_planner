@@ -1,8 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:expense_planner/core/language/language_constants.dart';
 import 'package:expense_planner/features/expense_planner/presentation/bloc/currency/currency_type_bloc.dart';
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/message_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:expense_planner/core/extentions/app_extentions.dart';
 
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/app_ui_params.dart';
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/model_bottom_sheet_widget.dart';
@@ -10,7 +12,7 @@ import 'package:expense_planner/features/expense_planner/presentation/widgets/cu
 import 'package:expense_planner/features/expense_planner/presentation/pages/drawer/drawer_widget.dart';
 
 class CurrencyTypeScreen extends StatelessWidget {
-  static const id = 'CurrencyTypeScreen';
+  // static const id = 'CurrencyTypeScreen';
   const CurrencyTypeScreen({super.key});
 
   @override
@@ -61,8 +63,8 @@ class CurrencyTypeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Manage Curency Types',
-                  style: TextStyle(fontSize: 20, color: Colors.white)),
+              Text(LanguageConstants.manageCurrencyTypes.t(context),
+                  style: const TextStyle(fontSize: 20, color: Colors.white)),
               const SizedBox(height: 10),
               BlocBuilder<CurrencyTypeBloc, CurrencyTypeState>(
                 builder: (context, state) {

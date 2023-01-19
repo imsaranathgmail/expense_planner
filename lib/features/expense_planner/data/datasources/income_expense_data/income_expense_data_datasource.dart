@@ -1,5 +1,5 @@
 import 'package:expense_planner/features/expense_planner/data/models/income_expense_data/income_expense_data_model.dart';
-import 'package:expense_planner/util/income_expense_data_db_helper.dart';
+import 'package:expense_planner/core/helper/db_util/income_expense_data_db_helper.dart';
 
 abstract class IncomeExpenseDatasource {
   Future<List<IncomeExpenseDataModel>> fetchIncomeExpenseData();
@@ -13,7 +13,6 @@ class IncomeExpenseDatasourceImpl implements IncomeExpenseDatasource {
   @override
   Future<List<IncomeExpenseDataModel>> fetchIncomeExpenseData() async {
     final incomeExpenseDataList = await IncomeExpenseDataDBHelper.fetchData();
-    // print(incomeExpenseDataList);
     final result =
         incomeExpenseDataList.map((type) => IncomeExpenseDataModel.fromMap(type)).toList();
     // print(result);

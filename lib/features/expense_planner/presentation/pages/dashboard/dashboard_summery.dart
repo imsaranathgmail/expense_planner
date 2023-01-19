@@ -1,6 +1,9 @@
+import 'package:expense_planner/core/extentions/app_extentions.dart';
+import 'package:expense_planner/core/helper/functions/currency_symbol_holder.dart';
+import 'package:expense_planner/core/language/language_constants.dart';
 import 'package:expense_planner/features/expense_planner/presentation/bloc/income_expense/income_expense_bloc.dart';
-import 'package:expense_planner/helper/common_function.dart';
-import 'package:expense_planner/helper/constants.dart';
+
+import 'package:expense_planner/core/constants/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -32,13 +35,14 @@ class DashboardSummery extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 10),
-            const Padding(
-              padding: EdgeInsets.only(left: 10),
-              child: Text('My Balance', style: TextStyle(fontSize: 25, color: Colors.white)),
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(LanguageConstants.myBalance.t(context),
+                  style: const TextStyle(fontSize: 25, color: Colors.white)),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: Text('${CurrencySymbol().currencySymbol} $myBalance',
+              child: Text('${CurrencySymbolHolder.currencySymbol} $myBalance',
                   style: const TextStyle(fontSize: 35, color: Colors.white)),
             ),
             Row(
@@ -48,11 +52,11 @@ class DashboardSummery extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 10),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
                       child: Text(
-                        'Income',
-                        style: TextStyle(
+                        LanguageConstants.income.t(context),
+                        style: const TextStyle(
                           fontSize: 15,
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -62,7 +66,7 @@ class DashboardSummery extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(
-                        '${CurrencySymbol().currencySymbol} $totalIncome',
+                        '${CurrencySymbolHolder.currencySymbol} $totalIncome',
                         style: const TextStyle(
                           fontSize: 25,
                           color: Colors.white,
@@ -75,11 +79,11 @@ class DashboardSummery extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 10),
-                    const Padding(
-                      padding: EdgeInsets.only(right: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
                       child: Text(
-                        'Spend',
-                        style: TextStyle(
+                        LanguageConstants.expense.t(context),
+                        style: const TextStyle(
                           fontSize: 15,
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -88,7 +92,7 @@ class DashboardSummery extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(right: 10),
-                      child: Text('${CurrencySymbol().currencySymbol} $totalExpense',
+                      child: Text('${CurrencySymbolHolder.currencySymbol} $totalExpense',
                           style: const TextStyle(fontSize: 25, color: Colors.white)),
                     ),
                   ],

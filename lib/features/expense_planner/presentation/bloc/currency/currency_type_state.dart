@@ -39,6 +39,7 @@ class CurrencyLoadedState extends CurrencyTypeState {
     );
   }
 
+  @override
   List<Object?> get props => [currencyList];
 }
 

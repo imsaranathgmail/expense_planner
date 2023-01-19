@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: must_be_immutable
 
+import 'package:expense_planner/core/extentions/app_extentions.dart';
+import 'package:expense_planner/core/language/language_constants.dart';
 import 'package:expense_planner/features/expense_planner/presentation/bloc/common_bloc/common_bloc.dart';
 import 'package:expense_planner/features/expense_planner/presentation/bloc/income_expense/income_expense_bloc.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +16,7 @@ import 'package:expense_planner/features/expense_planner/presentation/widgets/co
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/date_picker_widget.dart';
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/dialog_widget.dart';
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/drop_down_widget.dart';
-import 'package:expense_planner/helper/constants.dart';
+import 'package:expense_planner/core/constants/app_constants.dart';
 
 class AddIncomeExpenseDataWidget extends StatelessWidget {
   final int typeInt;
@@ -41,7 +43,10 @@ class AddIncomeExpenseDataWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(typeInt == isIncome ? 'Add Income Detail' : 'Add Expense Detail',
+            Text(
+                typeInt == isIncome
+                    ? LanguageConstants.addIncomeDetail.t(context)
+                    : LanguageConstants.addExpenseDetail.t(context),
                 style: const TextStyle(fontSize: 20, color: Colors.white)),
             const SizedBox(height: 10),
             BlocBuilder<IncomeExpenseBloc, IncomeExpenseState>(
@@ -74,9 +79,10 @@ class AddIncomeExpenseDataWidget extends StatelessWidget {
             TextField(
               controller: descriptionController,
               style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                label: Text('Description', style: TextStyle(color: Colors.white)),
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                label: Text(LanguageConstants.description.t(context),
+                    style: const TextStyle(color: Colors.white)),
               ),
             ),
             const SizedBox(height: 10),
@@ -90,9 +96,10 @@ class AddIncomeExpenseDataWidget extends StatelessWidget {
               controller: amountController,
               keyboardType: TextInputType.number,
               style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                label: Text('Amount', style: TextStyle(color: Colors.white)),
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                label: Text(LanguageConstants.amount.t(context),
+                    style: const TextStyle(color: Colors.white)),
               ),
             ),
             const SizedBox(height: 10),

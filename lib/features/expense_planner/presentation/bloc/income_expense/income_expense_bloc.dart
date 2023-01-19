@@ -8,7 +8,7 @@ import 'package:expense_planner/features/expense_planner/domain/entities/income_
 import 'package:expense_planner/features/expense_planner/domain/usecases/income_expense_data/income_expense_data_usecase.dart';
 import 'package:expense_planner/features/expense_planner/domain/entities/income_expense_type/income_expense_type_entity.dart';
 import 'package:expense_planner/features/expense_planner/domain/usecases/income_expense_type/income_expense_type_usecase.dart';
-import 'package:expense_planner/helper/constants.dart';
+import 'package:expense_planner/core/constants/app_constants.dart';
 
 part 'income_expense_event.dart';
 part 'income_expense_state.dart';
@@ -47,6 +47,7 @@ class IncomeExpenseBloc extends Bloc<IncomeExpenseEvent, IncomeExpenseState> {
   }
 
 //! Income Expense Type
+
   FutureOr<void> _onFetchIncomeExpenseType(
       FetchIncomeExpenseType event, Emitter<IncomeExpenseState> emit) async {
     final state = this.state;
@@ -118,8 +119,8 @@ class IncomeExpenseBloc extends Bloc<IncomeExpenseEvent, IncomeExpenseState> {
       List<IncomeExpenseTypeEntity> typeList = state.typeList;
       List<IncomeExpenseDataEntity> dataList = state.dataList;
 
-      typeList = List.from(typeList)..removeWhere((element) => element.id == dataEntity.id);
-      dataList = List.from(dataList)
+      typeList = List.from(state.typeList)..removeWhere((element) => element.id == dataEntity.id);
+      dataList = List.from(state.dataList)
         ..removeWhere((element) => element.incomeExpenseTypeId == dataEntity.id);
       emit(
         IncomeExpenseDataLoaded(

@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:expense_planner/core/extentions/app_extentions.dart';
+import 'package:expense_planner/core/language/language_constants.dart';
 import 'package:expense_planner/features/expense_planner/presentation/bloc/currency/currency_type_bloc.dart';
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/dialog_widget.dart';
 import 'package:flutter/material.dart';
@@ -31,23 +33,26 @@ class AddCurrencyTypeWidget extends StatelessWidget {
         padding: const EdgeInsets.only(top: 5, left: 5, right: 5),
         child: Column(
           children: [
-            const Text('Currency Type', style: TextStyle(fontSize: 20, color: Colors.white)),
+            Text(LanguageConstants.addCurrencyType.t(context),
+                style: const TextStyle(fontSize: 20, color: Colors.white)),
             const SizedBox(height: 10),
             TextField(
               controller: nameController,
               style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                label: Text('Currency Name', style: TextStyle(color: Colors.white)),
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                label: Text(LanguageConstants.currencyName.t(context),
+                    style: const TextStyle(color: Colors.white)),
               ),
             ),
             const SizedBox(height: 10),
             TextField(
               controller: symbolController,
               style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                label: Text('Currency Symbol', style: TextStyle(color: Colors.white)),
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                label: Text(LanguageConstants.currencySymbol.t(context),
+                    style: const TextStyle(color: Colors.white)),
               ),
             ),
             const SizedBox(height: 10),

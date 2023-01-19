@@ -1,5 +1,5 @@
 import 'package:expense_planner/features/expense_planner/data/models/income_expense_type/income_expense_type_model.dart';
-import 'package:expense_planner/util/income_expense_type_db_helper.dart';
+import 'package:expense_planner/core/helper/db_util/income_expense_type_db_helper.dart';
 
 abstract class IncomeExpenseTypeDatasource {
   Future<List<IncomeExpenseTypeModel>> fetchIncomeExpenseType();
@@ -12,7 +12,6 @@ class IncomeTypeDatasourceImpl implements IncomeExpenseTypeDatasource {
   @override
   Future<List<IncomeExpenseTypeModel>> fetchIncomeExpenseType() async {
     final incomeExpenseTypeList = await IncomeExpenseTypeDBHelper.fetchData();
-    // print(incomeExpenseTypeList);
     final result =
         incomeExpenseTypeList.map((type) => IncomeExpenseTypeModel.fromMap(type)).toList();
     return result;

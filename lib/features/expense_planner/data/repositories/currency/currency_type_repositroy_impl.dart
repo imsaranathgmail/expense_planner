@@ -3,7 +3,7 @@
 import 'package:expense_planner/features/expense_planner/data/datasources/currency/currency_type_datasource.dart';
 import 'package:expense_planner/features/expense_planner/data/models/currency/currency_type_model.dart';
 import 'package:expense_planner/features/expense_planner/domain/entities/currency/currency_type_entity.dart';
-import 'package:expense_planner/features/expense_planner/domain/repositories/currency/expense_type_repositroy.dart';
+import 'package:expense_planner/features/expense_planner/domain/repositories/currency/currency_type_repositroy.dart';
 
 class CurrencyTypeRepositoryImpl implements CurrencyTypeRepository {
   final CurrencyTypeDatasource currencyTypeDatasource;

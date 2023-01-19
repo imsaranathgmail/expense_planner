@@ -3,11 +3,11 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:expense_planner/core/helper/functions/currency_symbol_holder.dart';
 
 import 'package:expense_planner/features/expense_planner/domain/entities/currency/currency_type_entity.dart';
-import 'package:expense_planner/features/expense_planner/domain/usecases/currency/expense_type_usecase.dart';
-import 'package:expense_planner/helper/constants.dart';
-import 'package:expense_planner/injection_container.dart';
+import 'package:expense_planner/features/expense_planner/domain/usecases/currency/currency_type_usecase.dart';
+import 'package:expense_planner/core/constants/app_constants.dart';
 
 part 'currency_type_event.dart';
 part 'currency_type_state.dart';
@@ -38,6 +38,7 @@ class CurrencyTypeBloc extends Bloc<CurrencyTypeEvent, CurrencyTypeState> {
           currencyList: List.from(state.currencyList)..add(dataEntity),
         ),
       );
+      CurrencySymbolHolder.setCurrencySymbol(dataEntity);
     } else {
       emit(ErrorState(
         currencyTypeTxt + notSaved,
@@ -59,6 +60,7 @@ class CurrencyTypeBloc extends Bloc<CurrencyTypeEvent, CurrencyTypeState> {
         ..removeWhere((element) => element.id == dataEntiry.id)
         ..insert(0, dataEntiry);
       emit(CurrencyLoadedState(currencyList: currencyList));
+      CurrencySymbolHolder.setCurrencySymbol(dataEntiry);
     } else {
       emit(ErrorState(currencyTypeTxt + notUpdated, currencyList: state.currencyList));
     }
@@ -68,7 +70,8 @@ class CurrencyTypeBloc extends Bloc<CurrencyTypeEvent, CurrencyTypeState> {
     final currencyList = await fetchCurrencyTypeUsecase.execute();
     if (currencyList.isNotEmpty) {
       emit(CurrencyLoadedState(currencyList: currencyList));
-      Future.delayed(const Duration(milliseconds: 100));
+      CurrencySymbolHolder.setCurrencySymbol(currencyList.first);
+      Future.delayed(const Duration(milliseconds: 50));
     } else {
       emit(ErrorState(currencyTypeTxt + notLoaded, currencyList: state.currencyList));
     }

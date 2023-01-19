@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+import 'package:expense_planner/core/extentions/app_extentions.dart';
+import 'package:expense_planner/core/language/language_constants.dart';
 import 'package:expense_planner/features/expense_planner/presentation/bloc/income_expense/income_expense_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +11,7 @@ import 'package:expense_planner/features/expense_planner/domain/entities/income_
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/button_widget.dart';
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/app_ui_params.dart';
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/dialog_widget.dart';
-import 'package:expense_planner/helper/constants.dart';
+import 'package:expense_planner/core/constants/app_constants.dart';
 
 class AddIncomeExpenseTypeWidget extends StatelessWidget {
   final IncomeExpenseTypeEntity? incomeExpenseTypeEntity;
@@ -34,7 +36,10 @@ class AddIncomeExpenseTypeWidget extends StatelessWidget {
         child: Column(
           children: [
             incomeExpenseTypeEntity == null
-                ? Text(isIncomeType ? 'Income Source' : 'Expense Source',
+                ? Text(
+                    isIncomeType
+                        ? LanguageConstants.incomeSource.t(context)
+                        : LanguageConstants.expenseSource.t(context),
                     style: const TextStyle(fontSize: 20, color: Colors.white))
                 : Text(isIncomeType ? 'Update Income Source' : 'Update Expense Source',
                     style: const TextStyle(fontSize: 20, color: Colors.white)),
@@ -42,9 +47,10 @@ class AddIncomeExpenseTypeWidget extends StatelessWidget {
             TextField(
               controller: controller,
               style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                label: Text('Description', style: TextStyle(color: Colors.white)),
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                label: Text(LanguageConstants.description.t(context),
+                    style: const TextStyle(color: Colors.white)),
               ),
             ),
             const SizedBox(height: 10),

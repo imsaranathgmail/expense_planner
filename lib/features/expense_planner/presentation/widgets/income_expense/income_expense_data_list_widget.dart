@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable
+import 'package:expense_planner/core/helper/functions/currency_symbol_holder.dart';
 import 'package:expense_planner/features/expense_planner/presentation/bloc/income_expense/income_expense_bloc.dart';
-import 'package:expense_planner/helper/common_function.dart';
-import 'package:expense_planner/helper/constants.dart';
+import 'package:expense_planner/core/constants/app_constants.dart';
 import 'package:flutter/material.dart';
 
 import 'package:expense_planner/features/expense_planner/domain/entities/income_expense_data/income_expense_data_entity.dart';
@@ -38,7 +38,7 @@ class IncomeExpenseDataListWidget extends StatelessWidget {
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('${CurrencySymbol().currencySymbol} ${dataEntity.amount}',
+                  Text('${CurrencySymbolHolder.currencySymbol} ${dataEntity.amount}',
                       style: const TextStyle(fontSize: 18, color: Colors.white)),
                   Text(dataEntity.addDate,
                       style: const TextStyle(fontSize: 12, color: Colors.white)),
