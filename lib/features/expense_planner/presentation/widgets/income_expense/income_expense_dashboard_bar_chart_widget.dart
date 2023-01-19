@@ -52,14 +52,24 @@ class IncomeExpenseDashboardBarChartWidget extends StatelessWidget {
             // print('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
             chartData.add(ColumnChartData(dayString, dataMap['1'] ?? 0, dataMap['0'] ?? 0));
 
-            if (dataMap['1'] != null && dataMap['0'] != null) {
-              maxAmount = (dataMap['1']!.toDouble() > dataMap['0']!.toDouble())
-                  ? dataMap['1']!.toDouble()
-                  : dataMap['0']!.toDouble();
-            } else if (dataMap['1'] != null) {
-              maxAmount = dataMap['1']!.toDouble();
+            // if (dataMap['1'] != null && dataMap['0'] != null) {
+            //   maxAmount = (dataMap['1']!.toDouble() > dataMap['0']!.toDouble())
+            //       ? dataMap['1']!.toDouble()
+            //       : dataMap['0']!.toDouble();
+            // } else if (dataMap['1'] != null) {
+            //   maxAmount = dataMap['1']!.toDouble();
+            // } else if (dataMap['0'] != null) {
+            //   maxAmount = dataMap['0']!.toDouble();
+            // }
+
+            if (dataMap['1'] != null) {
+              if (dataMap['1']! > maxAmount) {
+                maxAmount = dataMap['1']!;
+              }
             } else if (dataMap['0'] != null) {
-              maxAmount = dataMap['0']!.toDouble();
+              if (dataMap['0']! > maxAmount) {
+                maxAmount = dataMap['1']!;
+              }
             }
           });
 
