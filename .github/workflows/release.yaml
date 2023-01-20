@@ -1,7 +1,7 @@
 name: Analyze, Test and Build
 
 on:
-  Push:
+  push:
     branches:
     - master
   pull_request:
@@ -9,13 +9,13 @@ on:
 jobs:
   lint:
     name: Alayze the code
-    runs_on: ubuntu_latest
+    runs-on: ubuntu-latest
     steps:
       - name: Clone flutter repository from stable channel with 3.3.10 version
         uses: subosito/flutter-action@v1
         with:
           flutter-version: '3.3.10'
-          channel:  'stable'
+          channel: 'stable'
 
       - name: Checkout the code
         uses: actions/checkout@v2
