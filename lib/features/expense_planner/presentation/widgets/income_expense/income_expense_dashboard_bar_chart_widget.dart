@@ -13,15 +13,8 @@ import 'package:intl/intl.dart';
 import 'package:expense_planner/features/expense_planner/presentation/widgets/common_widgets/app_ui_params.dart';
 
 class IncomeExpenseDashboardBarChartWidget extends StatelessWidget {
-  // int isIncomeCat;
-  // List<MapEntry<String, dynamic>> filteredMap;
-  // double? totalIncome;
-
   const IncomeExpenseDashboardBarChartWidget({
     Key? key,
-    // required this.isIncomeCat,
-    // required this.filteredMap,
-    // this.totalIncome,
   }) : super(key: key);
 
   @override
@@ -46,21 +39,7 @@ class IncomeExpenseDashboardBarChartWidget extends StatelessWidget {
                     ? previous += double.parse(element.amount)
                     : double.parse(element.amount)));
             final dayString = DateFormat('EEEE').format(DateTime.parse(weekDay)).substring(0, 3);
-            // print(data.reversed);
-            // print('------------------------------------------------------------------------------');
-            // print(dataMap);
-            // print('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
             chartData.add(ColumnChartData(dayString, dataMap['1'] ?? 0, dataMap['0'] ?? 0));
-
-            // if (dataMap['1'] != null && dataMap['0'] != null) {
-            //   maxAmount = (dataMap['1']!.toDouble() > dataMap['0']!.toDouble())
-            //       ? dataMap['1']!.toDouble()
-            //       : dataMap['0']!.toDouble();
-            // } else if (dataMap['1'] != null) {
-            //   maxAmount = dataMap['1']!.toDouble();
-            // } else if (dataMap['0'] != null) {
-            //   maxAmount = dataMap['0']!.toDouble();
-            // }
 
             if (dataMap['1'] != null) {
               if (dataMap['1']! > maxAmount) {
