@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "934406548589",
+    "project_id": "expense-planner-f5a61",
+    "storage_bucket": "expense-planner-f5a61.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:934406548589:android:46aad739a8c956633de364",
+        "android_client_info": {
+          "package_name": "com.example.expense_planner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "934406548589-ug4k714lbaari1kj6rtgh89oss9hqkul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGJZZL_Jo88t6Lhc-6CvydZovjeQClWvA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "934406548589-ug4k714lbaari1kj6rtgh89oss9hqkul.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "934406548589-38vv4i9a6h6n1ht2971n9bergje3848s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.expensePlanner"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -159,6 +159,27 @@ jobs:
         name: appbundle
         path: build/app/outputs/bundle/release/app-release.aab
 
+  firebase_distribution:
+    name: Release app to firebase distribution
+    runs-on: ubuntu-latest
+    needs: [ build ]
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Get appbundle from artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: appbundle
+        
+    - name: Firebase App Distribution
+      uses: wzieba/Firebase-Distribution-Github-Action@v1.2.1
+      with:
+        appId: ${{secrets.FIREBASE_ANDROID_APPID}}
+        token: ${{secrets.FIREBASE_TOKEN}}
+        groups: testers
+        file: app-release.aab
+
 
 
 
