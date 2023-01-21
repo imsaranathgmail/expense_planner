@@ -13,7 +13,7 @@ import 'package:expense_planner/features/expense_planner/presentation/pages/draw
 
 class CurrencyTypeScreen extends StatelessWidget {
   // static const id = 'CurrencyTypeScreen';
-  const CurrencyTypeScreen({super.key});
+  const CurrencyTypeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

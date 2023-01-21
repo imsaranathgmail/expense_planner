@@ -20,8 +20,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DashboardScreen extends StatefulWidget {
   // static const id = 'DashboardScreen';
-  const DashboardScreen({super.key});
 
+  const DashboardScreen({Key? key}) : super(key: key);
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
 }

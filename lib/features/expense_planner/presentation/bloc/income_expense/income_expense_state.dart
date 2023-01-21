@@ -62,5 +62,6 @@ class IncomeExpenseDataLoaded extends IncomeExpenseState {
 class ErrorState extends IncomeExpenseState {
   final String message;
 
-  const ErrorState(this.message, {required super.typeList, required super.dataList});
+  const ErrorState(this.message, {required typeList, required dataList})
+      : super(typeList: typeList, dataList: dataList);
 }
