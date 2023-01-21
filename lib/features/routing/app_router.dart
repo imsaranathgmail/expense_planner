@@ -12,6 +12,7 @@ class AppRouter {
     switch (routeSettings.name) {
       case Routes.dashboardScreen:
         return MaterialPageRoute(builder: (context) => const DashboardScreen());
+
       case Routes.incomeExpenseScreen:
         return MaterialPageRoute(builder: (context) => const IncomeExpenseScreen());
       case Routes.incomeExpenseTypeScreen:
