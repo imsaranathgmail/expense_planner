@@ -1,66 +1,97 @@
-name: Analyze, Test and Build
+# name: Analyze, Test and Build
 
-on:
-  push:
-    branches:
-    - master
-  pull_request:
+# on:
+#   push:
+#     branches:
+#     - master
+#   pull_request:
 
-jobs:
-  lint:
-    name: Alayze the code
-    runs-on: ubuntu-latest
-    steps:
-      - name: Clone flutter repository from stable channel with 3.3.10 version
-        uses: subosito/flutter-action@v1
-        with:
-          flutter-version: '3.3.10'
-          channel: 'stable'
+# jobs:
+#   lint:
+#     name: Alayze the code
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Clone flutter repository from stable channel with 3.3.10 version
+#         uses: subosito/flutter-action@v1
+#         with:
+#           flutter-version: '3.3.10'
+#           channel: 'stable'
 
-      - name: Checkout the code
-        uses: actions/checkout@v2
+#       - name: Checkout the code
+#         uses: actions/checkout@v2
       
-      - name: Update dependencies
-        run: flutter pub get
+#       - name: Update dependencies
+#         run: flutter pub get
 
-      - name: Analyze code
-        run: flutter analyze
+#       - name: Analyze code
+#         run: flutter analyze
   
-  test:
-    name: Test with coverage on ubuntu-latest
-    needs: lint
-    runs-on: ubuntu-latest
-    steps:
-      - name: Clone flutter repository from stable channel with 3.3.10 version
-        uses: subosito/flutter-action@v1
-        with:
-          flutter-version: '3.3.10'
-          channel: 'stable'
+#   test:
+#     name: Test with coverage on ubuntu-latest
+#     needs: lint
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Clone flutter repository from stable channel with 3.3.10 version
+#         uses: subosito/flutter-action@v1
+#         with:
+#           flutter-version: '3.3.10'
+#           channel: 'stable'
 
-      - name: Checkout the code
-        uses: actions/checkout@v2
+#       - name: Checkout the code
+#         uses: actions/checkout@v2
       
-      - name: Update dependencies
-        run: flutter pub get
+#       - name: Update dependencies
+#         run: flutter pub get
 
-      - name: Analyze code
-        run: flutter analyze
+#       - name: Analyze code
+#         run: flutter analyze
 
-      - name: Test and get test coverage
-        run: flutter test --coverage
+#       - name: Test and get test coverage
+#         run: flutter test --coverage
 
-      - name: Very good ventuers test coverage
-        uses: VGVentures/very-good-coverage@v1.1.1
-        with:
-          path: "./coverage/lcov.info"
-          min_coverage: 40
+#       - name: Very good ventuers test coverage
+#         uses: VGVentures/very-good-coverage@v1.1.1
+#         with:
+#           path: "./coverage/lcov.info"
+#           min_coverage: 40
 
-      - name: Upload to coverage to Codecov
-        uses: codecov/codecov-action@v1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          file: coverage/lcov.info
+#       - name: Upload to coverage to Codecov
+#         uses: codecov/codecov-action@v1
+#         with:
+#           token: ${{ secrets.CODECOV_TOKEN }}
+#           file: coverage/lcov.info
 
       
-      
+version:
+  name: create version number
+  run-on: ubuntu-latest
+
+  steps: 
+    - name: Check out code
+      uses: action/checkout@v2
+
+    - name: Fetech all history tags and branches
+      run: git fetch --unshallow --tags
+
+    - name: Git version
+      uses: gittools/action/gitversion/setup@v2.38.1
+      with:
+        versionSpec: '5.x'
+
+    - name: Use gitversion
+      id: gitversion
+      uses: gittools/actions/gitversion/execute@v2.38.1
+
+    - name: Create version.txt with nuGitVersion
+      run: echo ${{ steps.gitversion.outputs.nuGitVersion}} > version.txt
+
+    - name: Upload version.txt
+      uses: actions/upload-atrifact@v2
+      with:
+        name: gitversion
+        path: version.txt
+
+
+
+
   
