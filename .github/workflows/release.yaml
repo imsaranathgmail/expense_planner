@@ -62,33 +62,33 @@ jobs:
           file: coverage/lcov.info
 
       
-version:
-  name: create version number
-  run-on: ubuntu-latest
+  version:
+    name: create version number
+    run-on: ubuntu-latest
+    needs: [lint, test]
+    steps: 
+      - name: Check out code
+        uses: action/checkout@v2
 
-  steps: 
-    - name: Check out code
-      uses: action/checkout@v2
+      - name: Fetech all history tags and branches
+        run: git fetch --unshallow --tags
 
-    - name: Fetech all history tags and branches
-      run: git fetch --unshallow --tags
+      - name: Git version
+        uses: gittools/action/gitversion/setup@v2.38.1
+        with:
+          versionSpec: '5.x'
 
-    - name: Git version
-      uses: gittools/action/gitversion/setup@v2.38.1
-      with:
-        versionSpec: '5.x'
+      - name: Use gitversion
+        id: gitversion
+        uses: gittools/actions/gitversion/execute@v2.38.1
 
-    - name: Use gitversion
-      id: gitversion
-      uses: gittools/actions/gitversion/execute@v2.38.1
+      - name: Create version.txt with nuGitVersion
+        run: echo ${{ steps.gitversion.outputs.nuGitVersion}} > version.txt
 
-    - name: Create version.txt with nuGitVersion
-      run: echo ${{ steps.gitversion.outputs.nuGitVersion}} > version.txt
-
-    - name: Upload version.txt
-      uses: actions/upload-atrifact@v2
-      with:
-        name: gitversion
+      - name: Upload version.txt
+        uses: actions/upload-atrifact@v2
+        with:
+          name: gitversion
         path: version.txt
 
 
