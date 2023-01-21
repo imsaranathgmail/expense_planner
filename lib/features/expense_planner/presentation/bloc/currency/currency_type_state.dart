@@ -46,7 +46,7 @@ class CurrencyLoadedState extends CurrencyTypeState {
 class ErrorState extends CurrencyTypeState {
   final String message;
 
-  const ErrorState(this.message, {required super.currencyList});
+  const ErrorState(this.message, {required currencyList}) : super(currencyList: currencyList);
 
   @override
   List<Object?> get props => [message];
