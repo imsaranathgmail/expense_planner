@@ -107,7 +107,7 @@ jobs:
     - name: Clone flutter repository from stable channel with 2.2.3 version
       uses: subosito/flutter-action@v1
       with:
-        flutter-version: '2.2.3'
+        flutter-version: '3.3.10'
         channel: 'stable'
 
     - name: Get version.txt
