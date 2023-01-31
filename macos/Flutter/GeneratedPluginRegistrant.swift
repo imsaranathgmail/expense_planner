@@ -6,7 +6,7 @@ import FlutterMacOS
 import Foundation
 
 import firebase_core
-import shared_preferences_macos
+import shared_preferences_foundation
 import sqflite
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
