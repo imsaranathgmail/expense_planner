@@ -3,7 +3,7 @@ name: Analyze, Test and Build
 on:
   push:
     branches:
-      - master
+      - dev_android
 
 jobs:
   lint:
